@@ -156,6 +156,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .cal-cell.sun .cal-day{color:#EF5350}
 .cal-cell.sat .cal-day{color:#1E88E5}
 .cal-cell.today .cal-day{color:#fff !important}
+.cal-day.cal-today{background:#212121;color:#fff !important;border-radius:50%}
 .cal-apo{font-size:14px;font-weight:700;color:#212121;line-height:1}
 .cal-lbl{font-size:8px;color:#9E9E9E}
 .cal-dots{display:flex;gap:2px;justify-content:center;flex-wrap:wrap;max-width:36px}
@@ -1351,7 +1352,7 @@ window.onload=function(){
 </script>
 </body>
 </html>
-��─────────────────────────────────────────────
+��─────────────────────────────────────────────
 function shiftMonth(d){
   viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+d,1);
   monthlyCache={};prevMonthData={};prevMonthLoaded=false;
