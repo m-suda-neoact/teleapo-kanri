@@ -30,22 +30,27 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .counter-btns{display:flex;gap:8px}
 .btn-plus{flex:1;padding:16px 0;border:none;border-radius:12px;cursor:pointer;font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;transition:transform .08s,filter .08s}
 .btn-plus:active{transform:scale(.96);filter:brightness(.9)}
-.shortcut-hint{text-align:center;font-size:11px;color:#BDBDBD;margin-top:6px;margin-bottom:8px}
 .month-strip{border-radius:14px;padding:16px 20px;border:1px solid #EEEEEE;margin-top:4px}
 .strip-title{font-size:11px;font-weight:600;color:#9E9E9E;letter-spacing:.7px;text-transform:uppercase;margin-bottom:12px}
 .strip-grid{display:grid;grid-template-columns:repeat(5,1fr)}
 .strip-item{text-align:center;padding:4px 0}
-.strip-num{font-size:22px;font-weight:500}
+.strip-num{font-size:20px;font-weight:500}
 .strip-lbl{font-size:10px;color:#9E9E9E;margin-top:3px}
 .reset-btn{display:block;width:100%;margin-top:12px;padding:10px;background:none;border:1px dashed #E0E0E0;border-radius:10px;font-size:12px;color:#BDBDBD;cursor:pointer}
 .reset-btn:hover{color:#EF5350;border-color:#EF5350}
 
-/* Counter display-only (tsuden/apo) */
+/* Counter display-only */
 .counter-display{background:#FAFAFA;border-radius:14px;padding:14px 20px;margin-bottom:12px;border:1px solid #EEEEEE;display:flex;align-items:center;justify-content:space-between}
 .counter-display-left{display:flex;flex-direction:column}
 .counter-display-label{font-size:12px;font-weight:600;color:#9E9E9E;letter-spacing:.5px}
 .counter-display-rate{font-size:11px;color:#BDBDBD;margin-top:2px}
 .counter-display-num{font-size:36px;font-weight:300;line-height:1}
+
+/* Genre quick buttons on member page */
+.genre-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0}
+.genre-quick-btn{padding:15px 10px;border:2px solid #E0E0E0;border-radius:12px;background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:#212121;transition:all .12s;text-align:center}
+.genre-quick-btn:active{transform:scale(.95);background:#F5F5F5}
+.gq-full{grid-column:1/-1;padding:12px 10px}
 
 /* Dashboard */
 .db-header{background:#212121;border-radius:14px;padding:16px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
@@ -58,23 +63,26 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .month-nav-label{flex:1;text-align:center;font-size:14px;font-weight:700}
 .section-label{font-size:10px;font-weight:700;color:#9E9E9E;letter-spacing:.9px;text-transform:uppercase;margin-bottom:10px}
 
+/* Dashboard 2カラム ranking */
+.db-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+
 /* Ranking */
-.ranking-card{background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1px solid #EEEEEE}
-.rank-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ranking-card{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #EEEEEE}
+.rank-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .rank-row:last-child{margin-bottom:0}
-.rank-medal{font-size:15px;width:22px;text-align:center;flex-shrink:0}
-.rank-name{font-size:13px;font-weight:600;width:36px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis}
-.rank-bar-wrap{flex:1;background:#F5F5F5;border-radius:6px;height:24px;overflow:hidden;position:relative}
-.rank-bar{height:100%;border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;min-width:0}
-.rank-val{font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
-.rank-zero{font-size:12px;color:#BDBDBD;padding-left:8px}
+.rank-medal{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.rank-name{font-size:12px;font-weight:600;width:32px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis}
+.rank-bar-wrap{flex:1;background:#F5F5F5;border-radius:6px;height:22px;overflow:hidden;position:relative}
+.rank-bar{height:100%;border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;min-width:0}
+.rank-val{font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.rank-zero{font-size:11px;color:#BDBDBD;padding-left:6px}
 
 /* Summary table */
 .db-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #EEEEEE;margin-bottom:14px}
 .db-table{width:100%;border-collapse:collapse}
-.db-table th{font-size:10px;font-weight:700;color:#9E9E9E;padding:8px 8px;text-align:right;letter-spacing:.3px}
+.db-table th{font-size:10px;font-weight:700;color:#9E9E9E;padding:8px 6px;text-align:right;letter-spacing:.3px}
 .db-table th:first-child{text-align:left}
-.db-table td{padding:11px 8px;text-align:right;font-size:13px;border-bottom:1px solid #F5F5F5}
+.db-table td{padding:11px 6px;text-align:right;font-size:12px;border-bottom:1px solid #F5F5F5}
 .db-table td:first-child{text-align:left;font-weight:600;font-size:13px}
 .db-table tr:last-child td{border-bottom:none;font-weight:700;background:#FAFAFA}
 .color-badge{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
@@ -152,20 +160,14 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .online-dot{width:8px;height:8px;border-radius:50%;background:#9E9E9E;display:inline-block;margin-right:6px;vertical-align:middle}
 .online-dot.on{background:#4CAF50}
 
-/* Genre modal */
-.genre-step{transition:opacity .15s}
-.genre-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
-.genre-btn{padding:18px 12px;border:2px solid #E0E0E0;border-radius:14px;background:#fff;cursor:pointer;font-size:15px;font-weight:700;color:#212121;transition:all .12s;text-align:center}
-.genre-btn:active{transform:scale(.96)}
-.genre-btn.full{grid-column:1/-1}
+/* Result modal */
 .result-grid{display:flex;flex-direction:column;gap:10px}
-.result-btn{padding:18px 20px;border:none;border-radius:14px;cursor:pointer;font-size:15px;font-weight:700;color:#fff;transition:transform .08s,filter .08s;text-align:left;display:flex;align-items:center;gap:12px}
+.result-btn{padding:16px 18px;border:none;border-radius:14px;cursor:pointer;font-size:15px;font-weight:700;color:#fff;transition:transform .08s,filter .08s;text-align:left;display:flex;align-items:center;gap:12px}
 .result-btn:active{transform:scale(.97);filter:brightness(.92)}
 .result-btn .r-icon{font-size:22px}
 .result-btn .r-text{display:flex;flex-direction:column}
 .result-btn .r-label{font-size:15px;font-weight:700}
 .result-btn .r-sub{font-size:11px;opacity:.8;font-weight:400;margin-top:2px}
-.genre-back{background:none;border:none;color:#9E9E9E;font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:12px;display:flex;align-items:center;gap:4px}
 .selected-genre-badge{display:inline-block;background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;color:#424242;margin-bottom:16px}
 
 /* Graph */
@@ -176,9 +178,6 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .graph-metrics{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .metric-btn{padding:5px 12px;border:1px solid #E0E0E0;border-radius:20px;background:#fff;font-size:11px;font-weight:600;color:#9E9E9E;cursor:pointer;transition:all .12s}
 .metric-btn.active{background:#212121;color:#fff;border-color:#212121}
-.graph-filter{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-.filter-btn{padding:5px 12px;border:1.5px solid #E0E0E0;border-radius:20px;background:#fff;font-size:11px;font-weight:700;color:#9E9E9E;cursor:pointer;transition:all .12s}
-.filter-btn.active{background:#212121;color:#fff;border-color:#212121}
 </style>
 </head>
 <body>
@@ -201,13 +200,22 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
     <button class="month-nav-btn" onclick="shiftMonth(1)">›</button>
   </div>
 
-  <div class="section-label">🏆 アポ数ランキング</div>
-  <div class="ranking-card" id="ranking-card"></div>
+  <!-- 2カラムランキング -->
+  <div class="db-2col">
+    <div>
+      <div class="section-label">🏆 アポ数</div>
+      <div class="ranking-card" id="ranking-apo"></div>
+    </div>
+    <div>
+      <div class="section-label">🤝 成約数</div>
+      <div class="ranking-card" id="ranking-seiyaku"></div>
+    </div>
+  </div>
 
   <div class="section-label" style="margin-top:14px">📊 月間集計</div>
   <div class="db-card">
     <table class="db-table">
-      <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>通電率</th><th>アポ率</th></tr></thead>
+      <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>成約</th><th>通電率</th><th>アポ率</th><th>成約率</th></tr></thead>
       <tbody id="db-tbody"></tbody>
     </table>
   </div>
@@ -230,10 +238,10 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
       <button class="metric-btn active" id="gm-kakuden" onclick="setGraphMetric('kakuden')">架電数</button>
       <button class="metric-btn" id="gm-tsuden" onclick="setGraphMetric('tsuden')">通電数</button>
       <button class="metric-btn" id="gm-apo" onclick="setGraphMetric('apo')">アポ数</button>
+      <button class="metric-btn" id="gm-seiyaku" onclick="setGraphMetric('seiyaku')">成約数</button>
       <button class="metric-btn" id="gm-trate" onclick="setGraphMetric('trate')">通電率</button>
       <button class="metric-btn" id="gm-arate" onclick="setGraphMetric('arate')">アポ率</button>
     </div>
-    <div class="graph-filter" id="graph-filter"></div>
     <div style="position:relative;height:220px">
       <canvas id="trend-chart"></canvas>
     </div>
@@ -253,11 +261,15 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
       <div style="font-weight:700;margin-bottom:6px;font-size:12px;color:#9E9E9E;letter-spacing:.5px">✅ 通電にカウントされるケース</div>
       担当者・決裁者が実際に電話に出て、会話が成立した状態
     </div>
-    <div style="background:#FFF3F3;border-radius:10px;padding:12px 14px">
+    <div style="background:#FFF3F3;border-radius:10px;padding:12px 14px;margin-bottom:10px">
       <div style="font-weight:700;margin-bottom:6px;font-size:12px;color:#EF5350;letter-spacing:.5px">❌ 通電にカウントしないケース</div>
       <div>・呼び出し音が鳴ったが誰も出なかった（不在）</div>
       <div>・自動音声・留守番電話のみ</div>
       <div>・受付が出たが担当者に繋がらなかった</div>
+    </div>
+    <div style="background:#F3F0FF;border-radius:10px;padding:12px 14px">
+      <div style="font-weight:700;margin-bottom:6px;font-size:12px;color:#7B1FA2;letter-spacing:.5px">🤝 成約について</div>
+      <div>商談後に契約が確定したタイミングで記録。媒体運用・人材紹介の分野を選択。</div>
     </div>
   </div>
 </div>
@@ -273,45 +285,52 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
   </div>
 </div>
 
-<!-- 職種・結果選択モーダル -->
+<!-- 結果選択モーダル（職種選択後） -->
 <div class="modal-overlay hidden" id="modal-genre" onclick="if(event.target===this)closeGenreModal()">
   <div class="modal-sheet">
-    <!-- ステップ1：職種選択 -->
-    <div id="genre-step1">
-      <div class="modal-title">
-        <span>職種を選択</span>
-        <button class="modal-close" onclick="closeGenreModal()">×</button>
-      </div>
-      <div class="genre-grid">
-        <button class="genre-btn" onclick="selectGenre('IT')">💻 IT</button>
-        <button class="genre-btn" onclick="selectGenre('営業')">📈 営業</button>
-        <button class="genre-btn" onclick="selectGenre('建築')">🏗️ 建築</button>
-        <button class="genre-btn" onclick="selectGenre('接客')">🛎️ 接客</button>
-        <button class="genre-btn full" onclick="selectGenre('その他')">その他</button>
-      </div>
+    <div class="modal-title">
+      <span>結果を選択</span>
+      <button class="modal-close" onclick="closeGenreModal()">×</button>
     </div>
-    <!-- ステップ2：結果選択 -->
-    <div id="genre-step2" style="display:none">
-      <div class="modal-title">
-        <span>結果を選択</span>
-        <button class="modal-close" onclick="closeGenreModal()">×</button>
-      </div>
-      <button class="genre-back" onclick="backToStep1()">‹ 職種を選び直す</button>
-      <div id="selected-genre-disp" class="selected-genre-badge"></div>
-      <div class="result-grid">
-        <button class="result-btn" style="background:#78909C" onclick="recordCall('kakuden_only')">
-          <span class="r-icon">📞</span>
-          <span class="r-text"><span class="r-label">架電のみ</span><span class="r-sub">繋がらなかった</span></span>
-        </button>
-        <button class="result-btn" style="background:#42A5F5" onclick="recordCall('tsuden')">
-          <span class="r-icon">🗣️</span>
-          <span class="r-text"><span class="r-label">通電した</span><span class="r-sub">担当者・決裁者が実際に出た（自動応答・不在は×）</span></span>
-        </button>
-        <button class="result-btn" style="background:#66BB6A" onclick="recordCall('apo')">
-          <span class="r-icon">🎉</span>
-          <span class="r-text"><span class="r-label">アポ取れた！</span><span class="r-sub">商談確定</span></span>
-        </button>
-      </div>
+    <div id="selected-genre-disp" class="selected-genre-badge"></div>
+    <div class="result-grid">
+      <button class="result-btn" style="background:#78909C" onclick="recordCall('kakuden_only')">
+        <span class="r-icon">📞</span>
+        <span class="r-text"><span class="r-label">架電のみ</span><span class="r-sub">繋がらなかった / 自動応答・不在</span></span>
+      </button>
+      <button class="result-btn" style="background:#42A5F5" onclick="recordCall('tsuden')">
+        <span class="r-icon">🗣️</span>
+        <span class="r-text"><span class="r-label">通電した</span><span class="r-sub">担当者・決裁者が実際に出た</span></span>
+      </button>
+      <button class="result-btn" style="background:#66BB6A" onclick="recordCall('apo','media')">
+        <span class="r-icon">🎉</span>
+        <span class="r-text"><span class="r-label">アポ（媒体運用）</span><span class="r-sub">商談確定・媒体提案</span></span>
+      </button>
+      <button class="result-btn" style="background:#26A69A" onclick="recordCall('apo','jinzai')">
+        <span class="r-icon">🎊</span>
+        <span class="r-text"><span class="r-label">アポ（人材紹介）</span><span class="r-sub">商談確定・人材提案</span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 成約モーダル -->
+<div class="modal-overlay hidden" id="modal-seiyaku" onclick="if(event.target===this)closeSeiyakuModal()">
+  <div class="modal-sheet">
+    <div class="modal-title">
+      <span>🎊 成約を記録</span>
+      <button class="modal-close" onclick="closeSeiyakuModal()">×</button>
+    </div>
+    <div id="seiyaku-member-badge" class="selected-genre-badge"></div>
+    <div class="result-grid">
+      <button class="result-btn" style="background:#7B1FA2" onclick="recordSeiyaku('media')">
+        <span class="r-icon">📊</span>
+        <span class="r-text"><span class="r-label">媒体運用 成約</span><span class="r-sub">求人媒体の契約成立</span></span>
+      </button>
+      <button class="result-btn" style="background:#1565C0" onclick="recordSeiyaku('jinzai')">
+        <span class="r-icon">👥</span>
+        <span class="r-text"><span class="r-label">人材紹介 成約</span><span class="r-sub">人材紹介の契約成立</span></span>
+      </button>
     </div>
   </div>
 </div>
@@ -375,17 +394,18 @@ let db=null;
 let activeTab='db';
 let activeDates=[];
 let listeners={};
-let monthData={};   // {name:{kakuden,tsuden,apo}}
-let genreMonthData={};// {name:{IT:{kakuden,tsuden,apo},...}}
-let dailyData={};   // {name:{dateStr:{kakuden,tsuden,apo}}}
+let monthData={};
+let genreMonthData={};
+let dailyData={};
 let viewMonth=new Date();
 viewMonth.setDate(1);
 let selColor='#8BC34A';
 let membersReady=false;
 
-// 職種モーダル用の一時状態
+// モーダル用一時状態
 let _genreMi=null;
 let _selectedGenre=null;
+let _seiyakuMi=null;
 
 // ── ユーティリティ ────────────────────────────────────────
 function dateKey(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
@@ -412,7 +432,6 @@ function undoLast(){
 // ── UIビルド ────────────────────────────────────────────────
 function buildUI(savedTab){
   if(trendChart){trendChart.destroy();trendChart=null;}
-  graphFilter='all';
   document.querySelectorAll('.mpage').forEach(p=>p.remove());
   activeDates=MEMBERS.map(()=>new Date());
   const insertBefore=document.getElementById('modal-day');
@@ -428,18 +447,22 @@ function buildUI(savedTab){
         <button class="date-btn" onclick="chgDay(${mi},+1)">&#8250;</button>
       </div>
 
-      <!-- 架電カード（ボタン付き） -->
+      <!-- 架電（職種ボタンから直接） -->
       <div class="counter-card">
         <div class="counter-top">
           <div><div class="counter-label">架電数</div></div>
           <div class="counter-num" style="color:${m.color}" id="num-${mi}-0">0</div>
         </div>
-        <div class="counter-btns">
-          <button class="btn-plus" style="background:${m.color}" onclick="openGenreModal(${mi})">+1　架電</button>
+        <div class="genre-quick-grid">
+          <button class="genre-quick-btn" onclick="openGenreModal(${mi},'IT')">💻 IT</button>
+          <button class="genre-quick-btn" onclick="openGenreModal(${mi},'営業')">📈 営業</button>
+          <button class="genre-quick-btn" onclick="openGenreModal(${mi},'建築')">🏗️ 建築</button>
+          <button class="genre-quick-btn" onclick="openGenreModal(${mi},'接客')">🛎️ 接客</button>
+          <button class="genre-quick-btn gq-full" onclick="openGenreModal(${mi},'その他')">その他</button>
         </div>
       </div>
 
-      <!-- 通電カード（表示のみ） -->
+      <!-- 通電（表示のみ） -->
       <div class="counter-display">
         <div class="counter-display-left">
           <div class="counter-display-label">通電数</div>
@@ -448,7 +471,7 @@ function buildUI(savedTab){
         <div class="counter-display-num" style="color:${m.color}" id="num-${mi}-1">0</div>
       </div>
 
-      <!-- アポカード（表示のみ） -->
+      <!-- アポ（表示のみ） -->
       <div class="counter-display">
         <div class="counter-display-left">
           <div class="counter-display-label">アポ数</div>
@@ -457,16 +480,25 @@ function buildUI(savedTab){
         <div class="counter-display-num" style="color:${m.color}" id="num-${mi}-2">0</div>
       </div>
 
-      <div class="shortcut-hint">Q キーで架電モーダルを開く</div>
+      <!-- 成約（ボタン付き） -->
+      <div class="counter-card">
+        <div class="counter-top">
+          <div><div class="counter-label">成約数</div></div>
+          <div class="counter-num" style="color:#7B1FA2" id="num-${mi}-3">0</div>
+        </div>
+        <div class="counter-btns">
+          <button class="btn-plus" style="background:#7B1FA2" onclick="openSeiyakuModal(${mi})">＋ 成約を記録</button>
+        </div>
+      </div>
 
       <div class="month-strip" style="background:${m.color}18;border-color:${m.color}30">
         <div style="padding:16px 20px">
           <div class="strip-title">月間合計 <span style="font-weight:400;color:#9E9E9E" id="strip-month-${mi}"></span></div>
-          <div class="strip-grid">
-            ${['kakuden','tsuden','apo','trate','arate'].map((k,i)=>`
+          <div class="strip-grid" style="grid-template-columns:repeat(6,1fr)">
+            ${[['kakuden','架電'],['tsuden','通電'],['apo','アポ'],['seiyaku','成約'],['trate','通電率'],['arate','アポ率']].map(([k,lbl])=>`
             <div class="strip-item">
-              <div class="strip-num" style="color:${m.color}" id="m-${k}-${mi}">0</div>
-              <div class="strip-lbl">${['架電','通電','アポ','通電率','アポ率'][i]}</div>
+              <div class="strip-num" style="color:${k==='seiyaku'?'#7B1FA2':m.color}" id="m-${k}-${mi}">0</div>
+              <div class="strip-lbl">${lbl}</div>
             </div>`).join('')}
           </div>
         </div>
@@ -478,7 +510,7 @@ function buildUI(savedTab){
   buildTabs();
   monthData={};dailyData={};genreMonthData={};
   MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0};
+    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
     genreMonthData[m.name]=initGenreObj();
   });
@@ -552,6 +584,8 @@ function watchDay(mi){
     document.getElementById(`num-${mi}-0`).textContent=v.kakuden||0;
     document.getElementById(`num-${mi}-1`).textContent=v.tsuden||0;
     document.getElementById(`num-${mi}-2`).textContent=v.apo||0;
+    const s3=document.getElementById(`num-${mi}-3`);
+    if(s3) s3.textContent=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
     const kk=v.kakuden||0,t=v.tsuden||0,a=v.apo||0;
     document.getElementById(`rate-${mi}-1`).textContent=kk>0?'通電率 '+(t/kk*100).toFixed(1)+'%':'';
     document.getElementById(`rate-${mi}-2`).textContent=kk>0?'アポ率 '+(a/kk*100).toFixed(1)+'%':'';
@@ -568,14 +602,16 @@ function watchMonth(mi){
   const pfx=monthPfx(viewMonth);
   const ref=db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~');
   const fn=snap=>{
-    let kk=0,t=0,a=0;
+    let kk=0,t=0,a=0,am=0,aj=0,sm=0,sj=0;
     const daily={};
     const genre=initGenreObj();
     snap.forEach(c=>{
       const v=c.val()||{};
       kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
-      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0};
-      // 職種別集計
+      am+=(v.apo_media||0);aj+=(v.apo_jinzai||0);
+      sm+=(v.seiyaku_media||0);sj+=(v.seiyaku_jinzai||0);
+      const seiyakuDay=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
+      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay};
       if(v.genre){
         Object.entries(v.genre).forEach(([g,gv])=>{
           if(genre[g]){
@@ -586,7 +622,8 @@ function watchMonth(mi){
         });
       }
     });
-    monthData[m.name]={kakuden:kk,tsuden:t,apo:a};
+    const seiyaku=sm+sj;
+    monthData[m.name]={kakuden:kk,tsuden:t,apo:a,apo_media:am,apo_jinzai:aj,seiyaku,seiyaku_media:sm,seiyaku_jinzai:sj};
     dailyData[m.name]=daily;
     genreMonthData[m.name]=genre;
     const el=document.getElementById(`m-kakuden-${mi}`);
@@ -594,6 +631,8 @@ function watchMonth(mi){
       document.getElementById(`m-kakuden-${mi}`).textContent=kk;
       document.getElementById(`m-tsuden-${mi}`).textContent=t;
       document.getElementById(`m-apo-${mi}`).textContent=a;
+      const ms=document.getElementById(`m-seiyaku-${mi}`);
+      if(ms) ms.textContent=seiyaku;
       document.getElementById(`m-trate-${mi}`).textContent=kk>0?(t/kk*100).toFixed(1)+'%':'—';
       document.getElementById(`m-arate-${mi}`).textContent=kk>0?(a/kk*100).toFixed(1)+'%':'—';
       const sl=document.getElementById(`strip-month-${mi}`);
@@ -605,12 +644,11 @@ function watchMonth(mi){
   listeners[k]={ref,fn};
 }
 
-// ── 職種モーダル ──────────────────────────────────────────
-function openGenreModal(mi){
+// ── 職種モーダル（ワンステップ） ──────────────────────────
+function openGenreModal(mi, genre){
   _genreMi=mi;
-  _selectedGenre=null;
-  document.getElementById('genre-step1').style.display='block';
-  document.getElementById('genre-step2').style.display='none';
+  _selectedGenre=genre;
+  document.getElementById('selected-genre-disp').textContent=genre;
   document.getElementById('modal-genre').classList.remove('hidden');
 }
 
@@ -620,20 +658,7 @@ function closeGenreModal(){
   _selectedGenre=null;
 }
 
-function selectGenre(genre){
-  _selectedGenre=genre;
-  document.getElementById('genre-step1').style.display='none';
-  document.getElementById('genre-step2').style.display='block';
-  document.getElementById('selected-genre-disp').textContent=genre;
-}
-
-function backToStep1(){
-  _selectedGenre=null;
-  document.getElementById('genre-step1').style.display='block';
-  document.getElementById('genre-step2').style.display='none';
-}
-
-function recordCall(result){
+function recordCall(result, bunnya){
   if(_genreMi===null||!_selectedGenre||!db) return;
   const mi=_genreMi;
   const genre=_selectedGenre;
@@ -652,8 +677,12 @@ function recordCall(result){
   if(result==='apo'){
     base.child('apo').transaction(c=>Math.max(0,(c||0)+1));
     base.child(`genre/${genre}/apo`).transaction(c=>Math.max(0,(c||0)+1));
+    if(bunnya){
+      base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
+    }
   }
-  const label=result==='apo'?'🎉 アポ取れた！':result==='tsuden'?'🗣️ 通電 +1':'📞 架電 +1';
+  const bunnyaLabel=bunnya==='media'?'（媒体）':bunnya==='jinzai'?'（人材）':'';
+  const label=result==='apo'?`🎉 アポ！${bunnyaLabel}`:result==='tsuden'?'🗣️ 通電 +1':'📞 架電 +1';
   const undoCb=()=>{
     base.child('kakuden').transaction(c=>Math.max(0,(c||0)-1));
     base.child(`genre/${genre}/kakuden`).transaction(c=>Math.max(0,(c||0)-1));
@@ -664,19 +693,50 @@ function recordCall(result){
     if(result==='apo'){
       base.child('apo').transaction(c=>Math.max(0,(c||0)-1));
       base.child(`genre/${genre}/apo`).transaction(c=>Math.max(0,(c||0)-1));
+      if(bunnya) base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)-1));
     }
   };
   toastWithUndo(`[${genre}] ${label}`,undoCb);
   closeGenreModal();
 }
 
+// ── 成約モーダル ──────────────────────────────────────────
+function openSeiyakuModal(mi){
+  _seiyakuMi=mi;
+  document.getElementById('seiyaku-member-badge').textContent=MEMBERS[mi].name;
+  document.getElementById('modal-seiyaku').classList.remove('hidden');
+}
+
+function closeSeiyakuModal(){
+  document.getElementById('modal-seiyaku').classList.add('hidden');
+  _seiyakuMi=null;
+}
+
+function recordSeiyaku(bunnya){
+  if(_seiyakuMi===null||!db) return;
+  const mi=_seiyakuMi;
+  const m=MEMBERS[mi];
+  const dk=dateKey(activeDates[mi]);
+  const base=db.ref(`/members/${m.name}/${dk}`);
+  base.child(`seiyaku_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
+  const label=bunnya==='media'?'📊 媒体運用 成約！':'👥 人材紹介 成約！';
+  const undoCb=()=>{
+    base.child(`seiyaku_${bunnya}`).transaction(c=>Math.max(0,(c||0)-1));
+  };
+  toastWithUndo(label,undoCb);
+  closeSeiyakuModal();
+}
+
 function resetDay(mi){
   if(!db) return;
   openConfirm(
     `${MEMBERS[mi].name}さんの本日データをリセット`,
-    `${fmtDate(activeDates[mi])} の\n架電・通電・アポをすべて 0 に戻します`,
+    `${fmtDate(activeDates[mi])} の\n全データをリセットします`,
     ()=>{
-      db.ref(`/members/${MEMBERS[mi].name}/${dateKey(activeDates[mi])}`).set({kakuden:0,tsuden:0,apo:0,genre:{}});
+      db.ref(`/members/${MEMBERS[mi].name}/${dateKey(activeDates[mi])}`).set({
+        kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,
+        seiyaku_media:0,seiyaku_jinzai:0,genre:{}
+      });
       toast('リセットしました');
     }
   );
@@ -685,7 +745,6 @@ function resetDay(mi){
 // ── グラフ ──────────────────────────────────────────────────
 let graphPeriod='daily';
 let graphMetric='kakuden';
-let graphFilter='all';
 let trendChart=null;
 let monthlyCache={};
 
@@ -698,26 +757,11 @@ function setGraphPeriod(p){
 }
 function setGraphMetric(m){
   graphMetric=m;
-  ['kakuden','tsuden','apo','trate','arate'].forEach(k=>{
+  ['kakuden','tsuden','apo','seiyaku','trate','arate'].forEach(k=>{
     const el=document.getElementById(`gm-${k}`);
     if(el) el.classList.toggle('active',k===m);
   });
   renderGraph();
-}
-function setGraphFilter(f){
-  graphFilter=f;
-  buildFilterUI();
-  renderGraph();
-}
-function buildFilterUI(){
-  const el=document.getElementById('graph-filter');
-  if(!el) return;
-  const all=`<button class="filter-btn${graphFilter==='all'?' active':''}" onclick="setGraphFilter('all')">全員</button>`;
-  const members=MEMBERS.map(m=>{
-    const active=graphFilter===m.name;
-    return `<button class="filter-btn" style="${active?`background:${m.color};color:#fff;border-color:${m.color}`:`color:${m.color};border-color:${m.color}99`}" onclick="setGraphFilter('${m.name}')">${m.name}</button>`;
-  });
-  el.innerHTML=[all,...members].join('');
 }
 function getMetricVal(d,metric){
   if(!d) return 0;
@@ -728,8 +772,7 @@ function getMetricVal(d,metric){
 function buildDatasets(labels,getDataFn){
   const isRate=(graphMetric==='trate'||graphMetric==='arate');
   const datasets=[];
-  const targets=graphFilter==='all'?MEMBERS:MEMBERS.filter(m=>m.name===graphFilter);
-  targets.forEach(m=>{
+  MEMBERS.forEach(m=>{
     datasets.push({
       label:m.name,
       data:labels.map((_,i)=>getMetricVal(getDataFn(m.name,i),graphMetric)),
@@ -737,7 +780,7 @@ function buildDatasets(labels,getDataFn){
       borderWidth:2,pointRadius:3,tension:.3,fill:false
     });
   });
-  if(graphFilter==='all'&&MEMBERS.length>1){
+  if(MEMBERS.length>1){
     const totalData=labels.map((_,i)=>{
       if(isRate){
         let tk=0,tv=0;
@@ -757,8 +800,7 @@ function buildDatasets(labels,getDataFn){
 function renderGraph(){
   const canvas=document.getElementById('trend-chart');
   if(!canvas) return;
-  buildFilterUI();
-  const metricLabel={kakuden:'架電数',tsuden:'通電数',apo:'アポ数',trate:'通電率（%）',arate:'アポ率（%）'}[graphMetric];
+  const metricLabel={kakuden:'架電数',tsuden:'通電数',apo:'アポ数',seiyaku:'成約数',trate:'通電率（%）',arate:'アポ率（%）'}[graphMetric];
   let labels=[],datasets=[];
   if(graphPeriod==='daily'){
     const y=viewMonth.getFullYear(),mo=viewMonth.getMonth();
@@ -804,10 +846,14 @@ async function loadMonthlyAndRender(){
       promises.push(
         db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~')
           .once('value').then(snap=>{
-            let kk=0,t=0,a=0;
-            snap.forEach(c=>{const v=c.val()||{};kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;});
+            let kk=0,t=0,a=0,s=0;
+            snap.forEach(c=>{
+              const v=c.val()||{};
+              kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
+              s+=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
+            });
             if(!monthlyCache[pfx]) monthlyCache[pfx]={};
-            monthlyCache[pfx][m.name]={kakuden:kk,tsuden:t,apo:a};
+            monthlyCache[pfx][m.name]={kakuden:kk,tsuden:t,apo:a,seiyaku:s};
           })
       );
     });
@@ -822,6 +868,7 @@ function renderDB(){
   document.getElementById('month-nav-lbl').textContent=`${y}年${mo}月`;
   document.getElementById('db-sub').textContent=`${y}年${mo}月`;
   renderRanking();
+  renderSeiyakuRanking();
   renderTable();
   renderGenreTable();
   if(graphPeriod==='daily') renderGraph();
@@ -831,11 +878,11 @@ function renderDB(){
 function renderRanking(){
   const ranked=[...MEMBERS].map(m=>({...m,apo:monthData[m.name]?monthData[m.name].apo:0}))
     .sort((a,b)=>b.apo-a.apo);
-  const maxApo=Math.max(...ranked.map(r=>r.apo),1);
+  const maxVal=Math.max(...ranked.map(r=>r.apo),1);
   const medals=['🥇','🥈','🥉'];
   const html=ranked.map((r,i)=>{
-    const pct=maxApo>0?Math.max((r.apo/maxApo)*100,0):0;
-    const showIn=pct>=15;
+    const pct=maxVal>0?Math.max((r.apo/maxVal)*100,0):0;
+    const showIn=pct>=20;
     return `<div class="rank-row">
       <div class="rank-medal">${i<3?medals[i]:`${i+1}`}</div>
       <div class="rank-name">${r.name}</div>
@@ -847,29 +894,53 @@ function renderRanking(){
       </div>
     </div>`;
   }).join('');
-  document.getElementById('ranking-card').innerHTML=html||'<div style="color:#9E9E9E;text-align:center;padding:12px;font-size:13px">データなし</div>';
+  document.getElementById('ranking-apo').innerHTML=html||'<div style="color:#9E9E9E;text-align:center;padding:12px;font-size:13px">データなし</div>';
+}
+
+function renderSeiyakuRanking(){
+  const ranked=[...MEMBERS].map(m=>({...m,seiyaku:monthData[m.name]?monthData[m.name].seiyaku||0:0}))
+    .sort((a,b)=>b.seiyaku-a.seiyaku);
+  const maxVal=Math.max(...ranked.map(r=>r.seiyaku),1);
+  const medals=['🥇','🥈','🥉'];
+  const html=ranked.map((r,i)=>{
+    const pct=maxVal>0?Math.max((r.seiyaku/maxVal)*100,0):0;
+    const showIn=pct>=20;
+    return `<div class="rank-row">
+      <div class="rank-medal">${i<3?medals[i]:`${i+1}`}</div>
+      <div class="rank-name">${r.name}</div>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar" style="width:${pct}%;background:#7B1FA2">
+          ${showIn&&r.seiyaku>0?`<span class="rank-val">${r.seiyaku}件</span>`:''}
+        </div>
+        ${!showIn?`<span class="rank-zero">${r.seiyaku}件</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('ranking-seiyaku').innerHTML=html||'<div style="color:#9E9E9E;text-align:center;padding:12px;font-size:13px">データなし</div>';
 }
 
 function renderTable(){
-  let tK=0,tT=0,tA=0,html='';
+  let tK=0,tT=0,tA=0,tS=0,html='';
   MEMBERS.forEach(m=>{
-    const d=monthData[m.name]||{kakuden:0,tsuden:0,apo:0};
-    tK+=d.kakuden;tT+=d.tsuden;tA+=d.apo;
+    const d=monthData[m.name]||{kakuden:0,tsuden:0,apo:0,seiyaku:0};
+    const s=d.seiyaku||0;
+    tK+=d.kakuden;tT+=d.tsuden;tA+=d.apo;tS+=s;
     html+=`<tr>
       <td><span class="color-badge" style="background:${m.color}"></span>${m.name}</td>
-      <td>${d.kakuden}</td><td>${d.tsuden}</td><td>${d.apo}</td>
+      <td>${d.kakuden}</td><td>${d.tsuden}</td><td>${d.apo}</td><td>${s}</td>
       <td>${d.kakuden>0?(d.tsuden/d.kakuden*100).toFixed(1)+'%':'—'}</td>
       <td>${d.kakuden>0?(d.apo/d.kakuden*100).toFixed(1)+'%':'—'}</td>
+      <td>${d.apo>0?(s/d.apo*100).toFixed(1)+'%':'—'}</td>
     </tr>`;
   });
-  html+=`<tr><td>合計</td><td>${tK}</td><td>${tT}</td><td>${tA}</td>
+  html+=`<tr><td>合計</td><td>${tK}</td><td>${tT}</td><td>${tA}</td><td>${tS}</td>
     <td>${tK>0?(tT/tK*100).toFixed(1)+'%':'—'}</td>
-    <td>${tK>0?(tA/tK*100).toFixed(1)+'%':'—'}</td></tr>`;
+    <td>${tK>0?(tA/tK*100).toFixed(1)+'%':'—'}</td>
+    <td>${tA>0?(tS/tA*100).toFixed(1)+'%':'—'}</td></tr>`;
   document.getElementById('db-tbody').innerHTML=html;
 }
 
 function renderGenreTable(){
-  // 全メンバーの職種別データを合計
   const total=initGenreObj();
   MEMBERS.forEach(m=>{
     const gd=genreMonthData[m.name]||initGenreObj();
@@ -932,7 +1003,6 @@ function openDay(dk){
   const html=MEMBERS.map(m=>{
     const v=(dailyData[m.name]&&dailyData[m.name][dk])||{kakuden:0,tsuden:0,apo:0};
     const ar=v.kakuden>0?(v.apo/v.kakuden*100).toFixed(1)+'%':'—';
-    const tr=v.kakuden>0?(v.tsuden/v.kakuden*100).toFixed(1)+'%':'—';
     return `<div class="day-row">
       <div class="day-dot" style="background:${m.color}"></div>
       <div class="day-name">${m.name}</div>
@@ -1023,7 +1093,7 @@ function shiftMonth(d){
   viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+d,1);
   monthlyCache={};
   MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0};
+    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
     genreMonthData[m.name]=initGenreObj();
   });
@@ -1058,13 +1128,6 @@ function goToday(mi){
   document.getElementById(`dlbl-${mi}`).textContent=fmtDate(activeDates[mi]);
   watchDay(mi);
 }
-
-// ── キーボードショートカット ────────────────────────────────
-document.addEventListener('keydown',e=>{
-  if(typeof activeTab!=='number') return;
-  const k=e.key.toUpperCase();
-  if(k==='Q') openGenreModal(activeTab);
-});
 
 // ── Firebase初期化 ────────────────────────────────────────
 firebase.initializeApp(FB);
