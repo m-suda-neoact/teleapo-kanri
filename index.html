@@ -25,14 +25,13 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .counter-card{background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:12px;border:1px solid #EEEEEE}
 .counter-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
 .counter-label{font-size:12px;font-weight:600;color:#9E9E9E;letter-spacing:.5px;text-transform:uppercase}
-.counter-rate{font-size:12px;color:#9E9E9E;margin-top:4px}
 .counter-num{font-size:48px;font-weight:300;line-height:1}
 .counter-btns{display:flex;gap:8px}
 .btn-plus{flex:1;padding:16px 0;border:none;border-radius:12px;cursor:pointer;font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;transition:transform .08s,filter .08s}
 .btn-plus:active{transform:scale(.96);filter:brightness(.9)}
 .month-strip{border-radius:14px;padding:16px 20px;border:1px solid #EEEEEE;margin-top:4px}
 .strip-title{font-size:11px;font-weight:600;color:#9E9E9E;letter-spacing:.7px;text-transform:uppercase;margin-bottom:12px}
-.strip-grid{display:grid;grid-template-columns:repeat(5,1fr)}
+.strip-grid{display:grid}
 .strip-item{text-align:center;padding:4px 0}
 .strip-num{font-size:20px;font-weight:500}
 .strip-lbl{font-size:10px;color:#9E9E9E;margin-top:3px}
@@ -46,13 +45,44 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .counter-display-rate{font-size:11px;color:#BDBDBD;margin-top:2px}
 .counter-display-num{font-size:36px;font-weight:300;line-height:1}
 
-/* Genre quick buttons on member page */
+/* Genre quick buttons */
 .genre-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0}
 .genre-quick-btn{padding:15px 10px;border:2px solid #E0E0E0;border-radius:12px;background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:#212121;transition:all .12s;text-align:center}
 .genre-quick-btn:active{transform:scale(.95);background:#F5F5F5}
 .gq-full{grid-column:1/-1;padding:12px 10px}
 
-/* Dashboard */
+/* Goal bar */
+.goal-section{background:#fff;border-radius:14px;border:1px solid #EEEEEE;padding:14px 20px;margin-bottom:12px}
+.goal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.goal-title{font-size:11px;font-weight:700;color:#9E9E9E;letter-spacing:.7px;text-transform:uppercase}
+.goal-edit-btn{background:none;border:1px solid #E0E0E0;border-radius:8px;padding:3px 10px;font-size:11px;color:#9E9E9E;cursor:pointer}
+.goal-edit-btn:hover{color:#212121;border-color:#212121}
+.goal-bar-wrap{background:#F0F0F0;border-radius:20px;height:12px;overflow:hidden;margin-bottom:8px}
+.goal-bar-fill{height:100%;border-radius:20px;transition:width .5s cubic-bezier(.4,0,.2,1);min-width:0;background:#4CAF50}
+.goal-bar-fill.done{background:linear-gradient(90deg,#FFD700,#FFC107)}
+.goal-nums{display:flex;justify-content:space-between;align-items:baseline}
+.goal-current{font-size:12px;color:#757575}
+.goal-pct{font-size:14px;font-weight:700}
+
+/* Streak badge */
+.streak-badge{background:linear-gradient(135deg,#FF6B35,#FF8E53);color:#fff;border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.streak-badge.hidden{display:none}
+.streak-icon{font-size:28px;line-height:1}
+.streak-info{display:flex;flex-direction:column}
+.streak-label{font-size:10px;font-weight:700;letter-spacing:.7px;opacity:.8;text-transform:uppercase}
+.streak-count{font-size:24px;font-weight:700;line-height:1.1}
+.streak-sub{font-size:11px;opacity:.75;margin-top:2px}
+
+/* Dashboard PC 2-column */
+#page-db{max-width:none;padding:20px}
+.db-layout{display:grid;grid-template-columns:5fr 7fr;gap:16px;margin-bottom:16px;align-items:stretch}
+.db-col{display:flex;flex-direction:column;gap:14px}
+@media(max-width:900px){
+  #page-db{padding:12px}
+  .db-layout{grid-template-columns:1fr}
+}
+
+/* Dashboard header */
 .db-header{background:#212121;border-radius:14px;padding:16px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
 .db-title{font-size:16px;font-weight:700;color:#fff}
 .db-sub{font-size:11px;color:#888;margin-top:3px}
@@ -63,10 +93,8 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .month-nav-label{flex:1;text-align:center;font-size:14px;font-weight:700}
 .section-label{font-size:10px;font-weight:700;color:#9E9E9E;letter-spacing:.9px;text-transform:uppercase;margin-bottom:10px}
 
-/* Dashboard 2カラム ranking */
-.db-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-
 /* Ranking */
+.db-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .ranking-card{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #EEEEEE}
 .rank-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .rank-row:last-child{margin-bottom:0}
@@ -78,17 +106,44 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .rank-zero{font-size:11px;color:#BDBDBD;padding-left:6px}
 
 /* Summary table */
-.db-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #EEEEEE;margin-bottom:14px}
+.db-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #EEEEEE}
 .db-table{width:100%;border-collapse:collapse}
 .db-table th{font-size:10px;font-weight:700;color:#9E9E9E;padding:8px 6px;text-align:right;letter-spacing:.3px}
 .db-table th:first-child{text-align:left}
-.db-table td{padding:11px 6px;text-align:right;font-size:12px;border-bottom:1px solid #F5F5F5}
+.db-table td{padding:10px 6px;text-align:right;font-size:12px;border-bottom:1px solid #F5F5F5;vertical-align:top}
 .db-table td:first-child{text-align:left;font-weight:600;font-size:13px}
 .db-table tr:last-child td{border-bottom:none;font-weight:700;background:#FAFAFA}
 .color-badge{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.delta{font-size:9px;font-weight:700;display:block;margin-top:1px;line-height:1}
+.delta.up{color:#4CAF50}
+.delta.down{color:#EF5350}
+.delta.flat{color:#BDBDBD}
+
+/* Best genre banner */
+.best-genre-banner{background:linear-gradient(135deg,#E8F5E9,#EDE7F6);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;border:1px solid #E0E0E0}
+.best-genre-icon{font-size:22px;flex-shrink:0}
+.best-genre-label{font-size:10px;font-weight:700;color:#9E9E9E;letter-spacing:.5px;text-transform:uppercase}
+.best-genre-main{display:flex;align-items:baseline;gap:8px;margin-top:2px}
+.best-genre-nm{font-size:15px;font-weight:700;color:#212121}
+.best-genre-rate{font-size:13px;font-weight:700;color:#388E3C}
+.best-genre-sub{font-size:11px;color:#9E9E9E;margin-top:2px}
+
+/* Graph card */
+.graph-card{background:#fff;border-radius:14px;border:1px solid #EEEEEE;padding:16px 20px;flex:1;display:flex;flex-direction:column}
+.graph-tabs{display:flex;gap:6px;margin-bottom:12px}
+.graph-tab{padding:6px 14px;border:1px solid #E0E0E0;border-radius:20px;background:#fff;font-size:12px;font-weight:600;color:#9E9E9E;cursor:pointer;transition:all .12s}
+.graph-tab.active{background:#212121;color:#fff;border-color:#212121}
+.graph-metrics{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.metric-btn{padding:5px 12px;border:1px solid #E0E0E0;border-radius:20px;background:#fff;font-size:11px;font-weight:600;color:#9E9E9E;cursor:pointer;transition:all .12s}
+.metric-btn.active{background:#212121;color:#fff;border-color:#212121}
+
+/* Member filter buttons */
+.member-filter-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.member-filter-btn{padding:5px 14px;border-radius:20px;border:1.5px solid #E0E0E0;background:#fff;font-size:12px;font-weight:600;color:#757575;cursor:pointer;transition:all .12s}
+.member-filter-btn.active-all{background:#212121;color:#fff;border-color:#212121}
 
 /* Calendar */
-.calendar-card{background:#fff;border-radius:14px;padding:14px;border:1px solid #EEEEEE;margin-bottom:14px}
+.calendar-card{background:#fff;border-radius:14px;padding:14px;border:1px solid #EEEEEE}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
 .cal-hdr{text-align:center;font-size:10px;font-weight:700;color:#9E9E9E;padding:4px 0}
 .cal-hdr.sun{color:#EF5350}
@@ -105,6 +160,16 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .cal-lbl{font-size:8px;color:#9E9E9E}
 .cal-dots{display:flex;gap:2px;justify-content:center;flex-wrap:wrap;max-width:36px}
 .cal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.cal-cell.hot{background:#FFF8E1}
+.cal-cell.great{background:#E8F5E9}
+.cal-cell.great .cal-apo{color:#2E7D32}
+
+/* Genre accordion */
+.genre-acc-hdr{width:100%;background:#fff;border:1px solid #EEEEEE;border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:13px;font-weight:700;color:#212121;text-align:left;transition:background .1s}
+.genre-acc-hdr:hover{background:#F9F9F9}
+.genre-acc-hdr.open{border-radius:14px 14px 0 0}
+.genre-acc-body{background:#fff;border:1px solid #EEEEEE;border-top:none;border-radius:0 0 14px 14px;overflow:hidden}
+.genre-acc-body .db-table{border-radius:0}
 
 /* Modals */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;display:flex;align-items:flex-end;justify-content:center}
@@ -126,7 +191,6 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 /* Member manager */
 .member-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #F5F5F5}
 .member-row:last-child{border-bottom:none}
-.member-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
 .member-nm{flex:1;font-size:15px;font-weight:600}
 .del-btn{background:none;border:1px solid #E0E0E0;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;color:#9E9E9E}
 .del-btn:hover{color:#EF5350;border-color:#EF5350}
@@ -170,14 +234,24 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .result-btn .r-sub{font-size:11px;opacity:.8;font-weight:400;margin-top:2px}
 .selected-genre-badge{display:inline-block;background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;color:#424242;margin-bottom:16px}
 
-/* Graph */
-.graph-card{background:#fff;border-radius:14px;border:1px solid #EEEEEE;margin-bottom:14px;padding:16px 20px}
-.graph-tabs{display:flex;gap:6px;margin-bottom:12px}
-.graph-tab{padding:6px 14px;border:1px solid #E0E0E0;border-radius:20px;background:#fff;font-size:12px;font-weight:600;color:#9E9E9E;cursor:pointer;transition:all .12s}
-.graph-tab.active{background:#212121;color:#fff;border-color:#212121}
-.graph-metrics{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-.metric-btn{padding:5px 12px;border:1px solid #E0E0E0;border-radius:20px;background:#fff;font-size:11px;font-weight:600;color:#9E9E9E;cursor:pointer;transition:all .12s}
-.metric-btn.active{background:#212121;color:#fff;border-color:#212121}
+/* Celebration overlay */
+.celebration-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9990;display:flex;align-items:center;justify-content:center;animation:fadeInBg .25s ease}
+.celebration-overlay.hidden{display:none}
+.celebration-box{text-align:center;color:#fff;padding:40px;pointer-events:none}
+.cel-emoji{font-size:90px;line-height:1;margin-bottom:16px;display:block;animation:bounceIn .4s cubic-bezier(.68,-.55,.265,1.55)}
+.cel-text{font-size:28px;font-weight:800;margin-bottom:8px}
+.cel-sub{font-size:15px;opacity:.8}
+@keyframes fadeInBg{0%{opacity:0}100%{opacity:1}}
+@keyframes bounceIn{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+/* Confetti */
+#confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
+.confetti-piece{position:absolute;top:-20px;animation:confettiFall linear forwards}
+@keyframes confettiFall{
+  0%{transform:translateY(0) rotate(0deg);opacity:1}
+  75%{opacity:1}
+  100%{transform:translateY(110vh) rotate(540deg);opacity:0}
+}
 </style>
 </head>
 <body>
@@ -200,59 +274,82 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
     <button class="month-nav-btn" onclick="shiftMonth(1)">›</button>
   </div>
 
-  <!-- 2カラムランキング -->
-  <div class="db-2col">
-    <div>
-      <div class="section-label">🏆 アポ数</div>
-      <div class="ranking-card" id="ranking-apo"></div>
+  <!-- PC 2カラムc��イアウト -->
+  <div class="db-layout">
+    <!-- 左カラム -->
+    <div class="db-col">
+      <div>
+        <div class="db-2col">
+          <div>
+            <div class="section-label">🏆 アポ数</div>
+            <div class="ranking-card" id="ranking-apo"></div>
+          </div>
+          <div>
+            <div class="section-label">🤝 成約数</div>
+            <div class="ranking-card" id="ranking-seiyaku"></div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1">
+        <div class="section-label">📊 月間集計</div>
+        <div class="db-card">
+          <table class="db-table">
+            <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>成約</th><th>通電率</th><th>アポ率</th><th>成約率</th></tr></thead>
+            <tbody id="db-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="best-genre-area"></div>
     </div>
-    <div>
-      <div class="section-label">🤝 成約数</div>
-      <div class="ranking-card" id="ranking-seiyaku"></div>
+
+    <!-- 右カラム -->
+    <div class="db-col">
+      <div style="flex:1;display:flex;flex-direction:column">
+        <div class="section-label">📈 推移グラフ</div>
+        <div class="graph-card">
+          <div class="member-filter-btns" id="member-filter-btns"></div>
+          <div class="graph-tabs">
+            <button class="graph-tab active" id="gtab-daily" onclick="setGraphPeriod('daily')">日別（当月）</button>
+            <button class="graph-tab" id="gtab-monthly" onclick="setGraphPeriod('monthly')">月別（12ヶ月）</button>
+          </div>
+          <div class="graph-metrics">
+            <button class="metric-btn active" id="gm-kakuden" onclick="setGraphMetric('kakuden')">架電数</button>
+            <button class="metric-btn" id="gm-tsuden" onclick="setGraphMetric('tsuden')">通電数</button>
+            <button class="metric-btn" id="gm-apo" onclick="setGraphMetric('apo')">アポ数</button>
+            <button class="metric-btn" id="gm-seiyaku" onclick="setGraphMetric('seiyaku')">成約数</button>
+            <button class="metric-btn" id="gm-trate" onclick="setGraphMetric('trate')">通電率</button>
+            <button class="metric-btn" id="gm-arate" onclick="setGraphMetric('arate')">アポ率</button>
+          </div>
+          <div style="position:relative;flex:1;min-height:220px">
+            <canvas id="trend-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">📅 日別カレンダー</div>
+        <div class="calendar-card">
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="section-label" style="margin-top:14px">📊 月間集計</div>
-  <div class="db-card">
-    <table class="db-table">
-      <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>成約</th><th>通電率</th><th>アポ率</th><th>成約率</th></tr></thead>
-      <tbody id="db-tbody"></tbody>
-    </table>
-  </div>
-
-  <div class="section-label" style="margin-top:14px">🎯 職種別集計</div>
-  <div class="db-card">
-    <table class="db-table">
-      <thead><tr><th>職種</th><th>架電</th><th>通電</th><th>アポ</th><th>通電率</th><th>アポ率</th></tr></thead>
-      <tbody id="genre-tbody"></tbody>
-    </table>
-  </div>
-
-  <div class="section-label" style="margin-top:14px">📈 推移グラフ</div>
-  <div class="graph-card">
-    <div class="graph-tabs">
-      <button class="graph-tab active" id="gtab-daily" onclick="setGraphPeriod('daily')">日別（当月）</button>
-      <button class="graph-tab" id="gtab-monthly" onclick="setGraphPeriod('monthly')">月別（12ヶ月）</button>
-    </div>
-    <div class="graph-metrics">
-      <button class="metric-btn active" id="gm-kakuden" onclick="setGraphMetric('kakuden')">架電数</button>
-      <button class="metric-btn" id="gm-tsuden" onclick="setGraphMetric('tsuden')">通電数</button>
-      <button class="metric-btn" id="gm-apo" onclick="setGraphMetric('apo')">アポ数</button>
-      <button class="metric-btn" id="gm-seiyaku" onclick="setGraphMetric('seiyaku')">成約数</button>
-      <button class="metric-btn" id="gm-trate" onclick="setGraphMetric('trate')">通電率</button>
-      <button class="metric-btn" id="gm-arate" onclick="setGraphMetric('arate')">アポ率</button>
-    </div>
-    <div style="position:relative;height:220px">
-      <canvas id="trend-chart"></canvas>
+  <!-- 職種別集計 アコーディオン -->
+  <div style="margin-bottom:14px">
+    <button class="genre-acc-hdr" id="genre-acc-hdr" onclick="toggleGenreAcc()">
+      <span>📊 職種別集計</span>
+      <span id="genre-acc-arrow" style="font-size:12px;transition:transform .2s;display:inline-block">▶</span>
+    </button>
+    <div id="genre-acc-body" class="genre-acc-body" style="display:none">
+      <table class="db-table" style="width:100%">
+        <thead><tr><th>職種</th><th>架電</th><th>通電</th><th>アポ</th><th>通電率</th><th>アポ率</th></tr></thead>
+        <tbody id="genre-tbody"></tbody>
+      </table>
     </div>
   </div>
 
-  <div class="section-label">📅 日別カレンダー</div>
-  <div class="calendar-card">
-    <div class="cal-grid" id="cal-grid"></div>
-  </div>
-
-  <div class="section-label" style="margin-top:14px">📖 用語説明</div>
+  <!-- 用語説明 -->
+  <div class="section-label">📖 用語説明</div>
   <div style="background:#fff;border-radius:14px;border:1px solid #EEEEEE;padding:16px 20px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#424242">
     <div style="margin-bottom:12px">
       <span style="font-weight:700;color:#212121">通電率（接続率）</span>とは、架電数のうち担当者・決裁者が実際に電話に出た件数の割合です。
@@ -268,7 +365,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
       <div>・受付が出たが担当者に繋がらなかった</div>
     </div>
     <div style="background:#F3F0FF;border-radius:10px;padding:12px 14px">
-      <div style="font-weight:700;margin-bottom:6px;font-size:12px;color:#7B1FA2;letter-spacing:.5px">🤝 成約について</div>
+      <div style="font-weight:700;margin-bottom:6px;font-size:12px;color:#7B1FA2;letter-spacing:.5px">🤝 成約ついて</div>
       <div>商談後に契約が確定したタイミングで記録。媒体運用・人材紹介の分野を選択。</div>
     </div>
   </div>
@@ -298,7 +395,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
         <span class="r-icon">📞</span>
         <span class="r-text"><span class="r-label">架電のみ</span><span class="r-sub">繋がらなかった / 自動応答・不在</span></span>
       </button>
-      <button class="result-btn" style="background:#42A5F5" onclick="recordCall('tsuden')">
+      <button class="result-btn" style="background:#4:#42A5F5" onclick="recordCall('tsuden')">
         <span class="r-icon">🗣️</span>
         <span class="r-text"><span class="r-label">通電した</span><span class="r-sub">担当者・決裁者が実際に出た</span></span>
       </button>
@@ -364,18 +461,28 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
     <div class="confirm-sub" id="confirm-sub"></div>
     <div class="confirm-btns">
       <button class="confirm-no" onclick="confirmCancel()">NO　キャンセル</button>
-      <button class="confirm-yes" onclick="confirmYes()">YES　リセット</button>
+      <button class="confirm-yes" onclick="confirmYes()">YES　リセビト</button>
     </div>
   </div>
 </div>
 
+<!-- 成約セレブレーション -->
+<div class="celebration-overlay hidden" id="celebration-overlay" onclick="this.classList.add('hidden')">
+  <div class="celebration-box">
+    <span class="cel-emoji" id="cel-emoji">🎊</span>
+    <div class="cel-text" id="cel-text"></div>
+    <div class="cel-sub" id="cel-sub"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+<div id="confetti-container"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <script>
-// ── 定数 ────────────────────────────────────────────────────
+// ── 定数 ─────────────────────────────────────────────────────
 const GENRES = ['IT','営業','建築','接客','その他'];
 const DEFAULT_MEMBERS=[{name:'三五',color:'#8BC34A'},{name:'中山',color:'#29B6F6'},{name:'藤田',color:'#F4511E'}];
 const FB={
@@ -388,7 +495,7 @@ const FB={
   appId:"1:385687074224:web:145a788b51328f31eb5275"
 };
 
-// ── 状態 ────────────────────────────────────────────────────
+// ── 状態 ───────────────────────────────────────────
 let MEMBERS=[];
 let db=null;
 let activeTab='db';
@@ -401,39 +508,64 @@ let viewMonth=new Date();
 viewMonth.setDate(1);
 let selColor='#8BC34A';
 let membersReady=false;
+let prevMonthData={};
+let prevMonthLoaded=false;
+let graphMember=null;
+let genreAccOpen=false;
 
 // モーダル用一時状態
 let _genreMi=null;
 let _selectedGenre=null;
 let _seiyakuMi=null;
 
-// ── ユーティリティ ────────────────────────────────────────
+// ── ユーティリティ ───────────────────────────────────────────
 function dateKey(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
 function monthPfx(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
-function fmtDate(d){const days=['日','月','火','水','木','金','土'];return `${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;}
+function fmtDate(d){const days=['日','月','火','水','木','金','土'];火','水','木','金','土'];return `${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;}
 let toastT;
 let _undoCb=null;
 function toast(msg){const el=document.getElementById('toast');el.innerHTML=`<span>${msg}</span>`;el.classList.add('show');clearTimeout(toastT);_undoCb=null;toastT=setTimeout(()=>el.classList.remove('show'),1600);}
 function toastWithUndo(msg,undoCb){
   const el=document.getElementById('toast');
   el.innerHTML=`<span>${msg}</span><button class="toast-undo" onclick="undoLast()">取り消す</button>`;
-  el.classList.add('show');
-  clearTimeout(toastT);
-  _undoCb=undoCb;
+  el.classList.add('show');clearTimeout(toastT);_undoCb=undoCb;
   toastT=setTimeout(()=>{el.classList.remove('show');_undoCb=null;},5000);
 }
-function undoLast(){
-  if(!_undoCb) return;
-  _undoCb();_undoCb=null;
-  clearTimeout(toastT);
-  toast('取り消しました');
+function undoLast(){if(!_undoCb)return;_undoCb();_undoCb=null;clearTimeout(toastT);toast('取り消しました');}
+
+// ── 紙吹雪 ───────────────────────────────────────────────────
+function launchConfetti(isSeiyaku){
+  const colors=isSeiyaku
+    ?['#7B1FA2','#9C27B0','#CE93D8','#FFD700','#FFC107','#E040FB']
+    :['#4CAF50','#66BB6A','#A5D6A7','#FFD700','#FFF176','#FFCA28'];
+  const container=document.getElementById('confetti-container');
+  if(!container)return;
+  container.innerHTML='';
+  for(let i=0;i<90;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    const size=5+Math.random()*9;
+    el.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${size}px;height:${size}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-delay:${Math.random()*.4}s;animation-duration:${.9+Math.random()*.7}s;`;
+    container.appendChild(el);
+  }
+  setTimeout(()=>{if(container)container.innerHTML='';},2500);
 }
 
-// ── UIビルド ────────────────────────────────────────────────
+function showCelebration(emoji,text,sub){
+  document.getElementById('cel-emoji').textContent=emoji;
+  document.getElementById('cel-text').textContent=text;
+  document.getElementById('cel-sub').textContent=sub;
+  const ov=document.getElementById('celebration-overlay');
+  ov.classList.remove('hidden');
+  setTimeout(()=>ov.classList.add('hidden'),2500);
+}
+
+// ── UIビルド ─────────────────────────────────────────────────
 function buildUI(savedTab){
   if(trendChart){trendChart.destroy();trendChart=null;}
   document.querySelectorAll('.mpage').forEach(p=>p.remove());
   activeDates=MEMBERS.map(()=>new Date());
+  graphMember=null;
   const insertBefore=document.getElementById('modal-day');
   MEMBERS.forEach((m,mi)=>{
     const div=document.createElement('div');
@@ -447,7 +579,6 @@ function buildUI(savedTab){
         <button class="date-btn" onclick="chgDay(${mi},+1)">&#8250;</button>
       </div>
 
-      <!-- 架電（職種ボタンから直接） -->
       <div class="counter-card">
         <div class="counter-top">
           <div><div class="counter-label">架電数</div></div>
@@ -462,7 +593,6 @@ function buildUI(savedTab){
         </div>
       </div>
 
-      <!-- 通電（表示のみ） -->
       <div class="counter-display">
         <div class="counter-display-left">
           <div class="counter-display-label">通電数</div>
@@ -471,7 +601,6 @@ function buildUI(savedTab){
         <div class="counter-display-num" style="color:${m.color}" id="num-${mi}-1">0</div>
       </div>
 
-      <!-- アポ（表示のみ） -->
       <div class="counter-display">
         <div class="counter-display-left">
           <div class="counter-display-label">アポ数</div>
@@ -480,7 +609,6 @@ function buildUI(savedTab){
         <div class="counter-display-num" style="color:${m.color}" id="num-${mi}-2">0</div>
       </div>
 
-      <!-- 成約（ボタン付き） -->
       <div class="counter-card">
         <div class="counter-top">
           <div><div class="counter-label">成約数</div></div>
@@ -488,6 +616,31 @@ function buildUI(savedTab){
         </div>
         <div class="counter-btns">
           <button class="btn-plus" style="background:#7B1FA2" onclick="openSeiyakuModal(${mi})">＋ 成約を記録</button>
+        </div>
+      </div>
+
+      <!-- 今日の目標 -->
+      <div class="goal-section">
+        <div class="goal-header">
+          <div class="goal-title">🎯 Today's Goal</div>
+          <button class="goal-edit-btn" onclick="editGoal(${mi})">設定</button>
+        </div>
+        <div class="goal-bar-wrap">
+          <div class="goal-bar-fill" id="goal-bar-${mi}" style="width:0%"></div>
+        </div>
+        <div class="goal-nums">
+          <span class="goal-current" id="goal-current-${mi}">目標を設定してください</span>
+          <span class="goal-pct" id="goal-pct-${mi}" style="color:#BDBDBD"></span>
+        </div>
+      </div>
+
+      <!-- 連続記録ストリーク -->
+      <div class="streak-badge hidden" id="streak-badge-${mi}">
+        <div class="streak-icon">🔥</div>
+        <div class="streak-info">
+          <div class="streak-label">連続記録中</div>
+          <div class="streak-count" id="streak-count-${mi}">0日</div>
+          <div class="streak-sub">この調子で続けよう！</div>
         </div>
       </div>
 
@@ -520,9 +673,7 @@ function buildUI(savedTab){
 }
 
 function initGenreObj(){
-  const o={};
-  GENRES.forEach(g=>o[g]={kakuden:0,tsuden:0,apo:0});
-  return o;
+  const o={};GENRES.forEach(g=>o[g]={kakuden:0,tsuden:0,apo:0});return o;
 }
 
 function buildTabs(){
@@ -543,27 +694,22 @@ function buildTabs(){
   });
 }
 
-// ── Firebaseメンバー監視 ──────────────────────────────────
+// ── Firebaseメンバー監視 ─────────────────────────────────────
 function watchMembers(){
   db.ref('/config/members').on('value',snap=>{
-    const val=snap.val();
-    let arr=[];
-    if(val){
-      arr=Object.values(val).sort((a,b)=>(a.order||0)-(b.order||0));
-    }
+    const val=snap.val();let arr=[];
+    if(val){arr=Object.values(val).sort((a,b)=>(a.order||0)-(b.order||0));}
     if(arr.length===0){
       DEFAULT_MEMBERS.forEach((m,i)=>db.ref(`/config/members/${m.name}`).set({...m,order:i}));
       return;
     }
     const prev=activeTab;
     MEMBERS=arr.map(m=>({name:m.name,color:m.color}));
-    buildUI(prev);
-    startListeners();
-    membersReady=true;
+    buildUI(prev);startListeners();membersReady=true;
   });
 }
 
-// ── データリスナー ──────────────────────────────────────
+// ── データリスナー ───────────────────────────────────────────
 function startListeners(){
   Object.values(listeners).forEach(l=>l.ref&&l.ref.off('value',l.fn));
   listeners={};
@@ -588,98 +734,158 @@ function watchDay(mi){
     if(s3) s3.textContent=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
     const kk=v.kakuden||0,t=v.tsuden||0,a=v.apo||0;
     document.getElementById(`rate-${mi}-1`).textContent=kk>0?'通電率 '+(t/kk*100).toFixed(1)+'%':'';
-    document.getElementById(`rate-${mi}-2`).textContent=kk>0?'アポ率 '+(a/kk*100).toFixed(1)+'%':'';
-  };
+    document.getElementById(`rate-${mi}-2`).textContent=kk>0?'アポ率 '+(a/kʌL
+K�њ^Y
+JJ��IΉ��\]Q��[�\�ZJNN�Y��ۊ	ݘ[YI���N\�[�\����O^ܙY���NB���[��[ۈ�]�[۝
+ZJ^�ۜ��X[ۋI�Z_XY�\�[�\����J^�\�[�\����K��Y��ٙ�	ݘ[YI�\�[�\����K���N�B�Y�Y�ZO�SQSP�T�˛[��
+H�]\���ۜ�OSQSP�T���ZWN�ۜ��[[۝�
+�Y]�[۝
+N�ۜ��Y�Y���Y��Y[X�\����K��[Y_X
+K�ܙ\��R�^J
+K��\�]
+�
+K�[�]
+�
+�߉�N�ۜ���\ۘ\O�]��LLOL[OLZ�L�OLڏL�ۜ�Z[O^�N��ۜ��[��OZ[�]�[��Sؚ�
+Nۘ\��ܑXX�
+�O��ۜ��X˝�[
+
+_�N���]���Z�Y[��
+�]���Y[��J�]��\�[J�J��\��YYX_
+N�Z��J��\�ښ[��Z_
+N�J�J���Z^XZ�W�YYX_
+N�ڊ�J���Z^XZ�Wښ[��Z_
+N�ۜ��Z^XZ�Q^OJ���Z^XZ�W�YYX_
+J����Z^XZ�Wښ[��Z_
+NZ[V�˚�^WO^��Z�Y[�����Z�Y[��Y[�����Y[�\Ν��\��Z^XZ�N��Z^XZ�Q^_NY����[��J^ؚ�X��[��Y\����[��JK��ܑXX�
+
+��ݗJOO�Y��[��V��J^��[��V��K��Z�Y[��J݋��Z�Y[�
+N��[��V��K��Y[��J݋��Y[�
+N��[��V��K�\��J݋�\�
+N�B�JNB�JN�ۜ��Z^XZ�O\�J�ڎ[۝]V�K��[YWO^��Z�Y[�����Y[��\ΘK\��YYXN�[K\�ښ[��ZN�Z��Z^XZ�K�Z^XZ�W�YYXN��K�Z^XZ�Wښ[��ZN�ڟNZ[Q]V�K��[YWOYZ[N�[��S[۝]V�K��[YWOY�[��N�ۜ�[Y��[Y[���][[Y[��RY
+KZ�Z�Y[�I�Z_X
+NY�[
+^��[Y[���][[Y[��RY
+KZ�Z�Y[�I�Z_X
+K�^�۝[�Z����[Y[���][[Y[��RY
+K]�Y[�I�Z_X
+K�^�۝[�]��[Y[���][[Y[��RY
+KX\�I�Z_X
+K�^�۝[�XN�ۜ�\�Y��[Y[���][[Y[��RY
+K\�Z^XZ�KI�Z_X
+NY�\�H\˝^�۝[�\�Z^XZ�N��[Y[���][[Y[��RY
+K]�]KI�Z_X
+K�^�۝[�Z�ό���ʌL
+K�њ^Y
+JJ��IΉ��%	���[Y[���][[Y[��RY
+KX\�]KI�Z_X
+K�^�۝[�Z�ό�K��ʌL
+K�њ^Y
+JJ��IΉ��%	��ۜ��Y��[Y[���][[Y[��RY
+��\[[۝I�Z_X
+NY��
+H��^�۝[�X	ݚY]�[۝��]�[YX\�
+_|��	ݚY]�[۝��][۝
+
+J�_y�"B�\]T��XZ�ZJNY�X�]�UX�OOI���H�[�\��
+NN�
   ref.on('value',fn);
   listeners[k]={ref,fn};
 }
 
-function watchMonth(mi){
-  const k=`mon-${mi}`;
-  if(listeners[k]){listeners[k].ref.off('value',listeners[k].fn);}
-  if(!db||mi>=MEMBERS.length) return;
-  const m=MEMBERS[mi];
-  const pfx=monthPfx(viewMonth);
-  const ref=db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~');
-  const fn=snap=>{
-    let kk=0,t=0,a=0,am=0,aj=0,sm=0,sj=0;
-    const daily={};
-    const genre=initGenreObj();
-    snap.forEach(c=>{
-      const v=c.val()||{};
-      kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
-      am+=(v.apo_media||0);aj+=(v.apo_jinzai||0);
-      sm+=(v.seiyaku_media||0);sj+=(v.seiyaku_jinzai||0);
-      const seiyakuDay=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
-      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay};
-      if(v.genre){
-        Object.entries(v.genre).forEach(([g,gv])=>{
-          if(genre[g]){
-            genre[g].kakuden+=(gv.kakuden||0);
-            genre[g].tsuden+=(gv.tsuden||0);
-            genre[g].apo+=(gv.apo||0);
-          }
-        });
-      }
-    });
-    const seiyaku=sm+sj;
-    monthData[m.name]={kakuden:kk,tsuden:t,apo:a,apo_media:am,apo_jinzai:aj,seiyaku,seiyaku_media:sm,seiyaku_jinzai:sj};
-    dailyData[m.name]=daily;
-    genreMonthData[m.name]=genre;
-    const el=document.getElementById(`m-kakuden-${mi}`);
-    if(el){
-      document.getElementById(`m-kakuden-${mi}`).textContent=kk;
-      document.getElementById(`m-tsuden-${mi}`).textContent=t;
-      document.getElementById(`m-apo-${mi}`).textContent=a;
-      const ms=document.getElementById(`m-seiyaku-${mi}`);
-      if(ms) ms.textContent=seiyaku;
-      document.getElementById(`m-trate-${mi}`).textContent=kk>0?(t/kk*100).toFixed(1)+'%':'—';
-      document.getElementById(`m-arate-${mi}`).textContent=kk>0?(a/kk*100).toFixed(1)+'%':'—';
-      const sl=document.getElementById(`strip-month-${mi}`);
-      if(sl) sl.textContent=`${viewMonth.getFullYear()}年${viewMonth.getMonth()+1}月`;
-    }
-    if(activeTab==='db') renderDB();
-  };
-  ref.on('value',fn);
-  listeners[k]={ref,fn};
+// ── ストリーク ───────────────────────────────────────────────
+function calcStreak(name){
+  const daily=dailyData[name]||{};
+  const today=new Date();
+  const todayDk=dateKey(today);
+  let streak=0;
+  let d=new Date(today);
+  for(let i=0;i<35;i++){
+    const dk=dateKey(d);
+    const v=daily[dk];
+    const has=v&&v.kakuden>0;
+    if(has){streak++;}
+    else if(dk===todayDk){d.setDate(d.getDate()-1);continue;}
+    else{break;}
+    d.setDate(d.getDate()-1);
+  }
+  return streak;
+}
+function updateStreak(mi){
+  if(mi>=MEMBERS.length) return;
+  const streak=calcStreak(MEMBERS[mi].name);
+  const badge=document.getElementById(`streak-badge-${mi}`);
+  const countEl=document.getElementById(`streak-count-${mi}`);
+  if(!badge||!countEl) return;
+  if(streak>=2){
+    countEl.textContent=`${streak}日連続`;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
 }
 
-// ── 職種モーダル（ワンステップ） ──────────────────────────
-function openGenreModal(mi, genre){
-  _genreMi=mi;
-  _selectedGenre=genre;
+// ── 今日の目標 ───────────────────────────────────────────────
+function getGoal(mi){return parseInt(localStorage.getItem(`goal-${MEMBERS[mi]?.name}`)||'0')||0;}
+function editGoal(mi){
+  const cur=getGoal(mi);
+  const val=prompt(`${MEMBERS[mi].name}さんの1日の架電目標（件数）を入力してください`,cur||'50');
+  if(val===null) return;
+  const num=parseInt(val);
+  if(isNaN(num)||num<0){toast('正しい数値を入力してください');return;}
+  localStorage.setItem(`goal-${MEMBERS[mi].name}`,num);
+  updateGoalBar(mi);
+  toast(`目標を${num}件に設定しました 🎯`);
+}
+function updateGoalBar(mi){
+  const goal=getGoal(mi);
+  const kakuden=parseInt(document.getElementById(`num-${mi}-0`)?.textContent||'0');
+  const bar=document.getElementById(`goal-bar-${mi}`);
+  const curEl=document.getElementById(`goal-current-${mi}`);
+  const pctEl=document.getElementById(`goal-pct-${mi}`);
+  if(!bar) return;
+  if(goal<=0){
+    bar.style.width='0%';
+    if(curEl) curEl.textContent='目標を設定してください';
+    if(pctEl){pctEl.textContent='';pctEl.style.color='#BDBDBD';}
+    return;
+  }
+  const pct=Math.min((kakuden/goal)*100,100);
+  bar.style.width=pct+'%';
+  bar.className='goal-bar-fill'+(pct>=100?' done':'');
+  if(curEl) curEl.textContent=`架電 ${kakuden} / ${goal}件`;
+  if(pctEl){
+    pctEl.textContent=Math.floor(pct)+'%';
+    pctEl.style.color=pct>=100?'#FFC107':pct>=70?'#4CAF50':pct>=40?'#FFA000':'#BDBDBD';
+  }
+}
+
+// ── 職種モーダル ─────────────────────────────────────────────
+function openGenreModal(mi,genre){
+  _genreMi=mi;_selectedGenre=genre;
   document.getElementById('selected-genre-disp').textContent=genre;
   document.getElementById('modal-genre').classList.remove('hidden');
 }
-
 function closeGenreModal(){
   document.getElementById('modal-genre').classList.add('hidden');
-  _genreMi=null;
-  _selectedGenre=null;
+  _genreMi=null;_selectedGenre=null;
 }
-
-function recordCall(result, bunnya){
+function recordCall(result,bunnya){
   if(_genreMi===null||!_selectedGenre||!db) return;
-  const mi=_genreMi;
-  const genre=_selectedGenre;
-  const m=MEMBERS[mi];
-  const dk=dateKey(activeDates[mi]);
+  const mi=_genreMi;const genre=_selectedGenre;
+  const m=MEMBERS[mi];const dk=dateKey(activeDates[mi]);
   const base=db.ref(`/members/${m.name}/${dk}`);
-  // 架電数+1
   base.child('kakuden').transaction(c=>Math.max(0,(c||0)+1));
   base.child(`genre/${genre}/kakuden`).transaction(c=>Math.max(0,(c||0)+1));
-  // 通電
   if(result==='tsuden'||result==='apo'){
     base.child('tsuden').transaction(c=>Math.max(0,(c||0)+1));
     base.child(`genre/${genre}/tsuden`).transaction(c=>Math.max(0,(c||0)+1));
   }
-  // アポ
   if(result==='apo'){
     base.child('apo').transaction(c=>Math.max(0,(c||0)+1));
     base.child(`genre/${genre}/apo`).transaction(c=>Math.max(0,(c||0)+1));
-    if(bunnya){
-      base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
-    }
+    if(bunnya) base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
+    launchConfetti(false);
   }
   const bunnyaLabel=bunnya==='media'?'（媒体）':bunnya==='jinzai'?'（人材）':'';
   const label=result==='apo'?`🎉 アポ！${bunnyaLabel}`:result==='tsuden'?'🗣️ 通電 +1':'📞 架電 +1';
@@ -700,30 +906,27 @@ function recordCall(result, bunnya){
   closeGenreModal();
 }
 
-// ── 成約モーダル ──────────────────────────────────────────
+// ── 成約モーダル ─────────────────────────────────────────────
 function openSeiyakuModal(mi){
   _seiyakuMi=mi;
   document.getElementById('seiyaku-member-badge').textContent=MEMBERS[mi].name;
   document.getElementById('modal-seiyaku').classList.remove('hidden');
 }
-
 function closeSeiyakuModal(){
   document.getElementById('modal-seiyaku').classList.add('hidden');
   _seiyakuMi=null;
 }
-
 function recordSeiyaku(bunnya){
   if(_seiyakuMi===null||!db) return;
-  const mi=_seiyakuMi;
-  const m=MEMBERS[mi];
+  const mi=_seiyakuMi;const m=MEMBERS[mi];
   const dk=dateKey(activeDates[mi]);
   const base=db.ref(`/members/${m.name}/${dk}`);
   base.child(`seiyaku_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
-  const label=bunnya==='media'?'📊 媒体運用 成約！':'👥 人材紹介 成約！';
-  const undoCb=()=>{
-    base.child(`seiyaku_${bunnya}`).transaction(c=>Math.max(0,(c||0)-1));
-  };
-  toastWithUndo(label,undoCb);
+  const label=bunnya==='media'?'媒体運用 成約！':'人材紹介 成約！';
+  const undoCb=()=>{base.child(`seiyaku_${bunnya}`).transaction(c=>Math.max(0,(c||0)-1));};
+  launchConfetti(true);
+  showCelebration('🎊',`${m.name}さん、${label}`,bunnya==='media'?'求人媒体の契約成立 おめでとう！':'人材紹介の契約成立 おめでとう！');
+  toastWithUndo(`🎊 ${label}`,undoCb);
   closeSeiyakuModal();
 }
 
@@ -734,15 +937,33 @@ function resetDay(mi){
     `${fmtDate(activeDates[mi])} の\n全データをリセットします`,
     ()=>{
       db.ref(`/members/${MEMBERS[mi].name}/${dateKey(activeDates[mi])}`).set({
-        kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,
-        seiyaku_media:0,seiyaku_jinzai:0,genre:{}
+        kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku_media:0,seiyaku_jinzai:0,genre:{}
       });
       toast('リセットしました');
     }
   );
 }
 
-// ── グラフ ──────────────────────────────────────────────────
+// ── グラフメンバーフィルター ─────────────────────────────────
+function setGraphMember(name){
+  graphMember=name;
+  renderMemberFilterBtns();
+  if(graphPeriod==='monthly') loadMonthlyAndRender();
+  else renderGraph();
+}
+function renderMemberFilterBtns(){
+  const container=document.getElementById('member-filter-btns');
+  if(!container) return;
+  let html=`<button class="member-filter-btn${graphMember===null?' active-all':''}" onclick="setGraphMember(null)">全員</button>`;
+  MEMBERS.forEach(m=>{
+    const active=graphMember===m.name;
+    const st=active?`background:${m.color};border-color:${m.color};color:#fff`:'';
+    html+=`<button class="member-filter-btn" style="${st}" onclick="setGraphMember('${m.name}')">${m.name}</button>`;
+  });
+  container.innerHTML=html;
+}
+
+// ── グラフ ───────────────────────────────────────────────────
 let graphPeriod='daily';
 let graphMetric='kakuden';
 let trendChart=null;
@@ -772,7 +993,8 @@ function getMetricVal(d,metric){
 function buildDatasets(labels,getDataFn){
   const isRate=(graphMetric==='trate'||graphMetric==='arate');
   const datasets=[];
-  MEMBERS.forEach(m=>{
+  const membersToShow=graphMember?MEMBERS.filter(m=>m.name===graphMember):MEMBERS;
+  membersToShow.forEach(m=>{
     datasets.push({
       label:m.name,
       data:labels.map((_,i)=>getMetricVal(getDataFn(m.name,i),graphMetric)),
@@ -780,7 +1002,7 @@ function buildDatasets(labels,getDataFn){
       borderWidth:2,pointRadius:3,tension:.3,fill:false
     });
   });
-  if(MEMBERS.length>1){
+  if(!graphMember&&MEMBERS.length>1){
     const totalData=labels.map((_,i)=>{
       if(isRate){
         let tk=0,tv=0;
@@ -818,8 +1040,7 @@ function renderGraph(){
     datasets=buildDatasets(labels,(name,i)=>monthlyCache[labels[i]]&&monthlyCache[labels[i]][name]);
   }
   if(trendChart){
-    trendChart.data.labels=labels;
-    trendChart.data.datasets=datasets;
+    trendChart.data.labels=labels;trendChart.data.datasets=datasets;
     trendChart.options.scales.y.title.text=metricLabel;
     trendChart.update('none');
   } else {
@@ -827,10 +1048,10 @@ function renderGraph(){
       type:'line',data:{labels,datasets},
       options:{
         responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:12,padding:8}}},
+        plugins:{legend:{display:false}},
         scales:{
           x:{ticks:{font:{size:10},maxRotation:45},grid:{display:false}},
-          y:{title:{display:true,text:metricLabel,font:{size:10}},ticks:{font:{size:10}},beginAtZero:true}
+          y>{title:{display:true,text:metricLabel,font:{size:10}},ticks:{font:{size:10}},beginAtZero:true}
         },
         animation:{duration:200}
       }
@@ -847,11 +1068,7 @@ async function loadMonthlyAndRender(){
         db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~')
           .once('value').then(snap=>{
             let kk=0,t=0,a=0,s=0;
-            snap.forEach(c=>{
-              const v=c.val()||{};
-              kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
-              s+=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
-            });
+            snap.forEach(c=>{const v=c.val()||{};kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;s+=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);});
             if(!monthlyCache[pfx]) monthlyCache[pfx]={};
             monthlyCache[pfx][m.name]={kakuden:kk,tsuden:t,apo:a,seiyaku:s};
           })
@@ -862,281 +1079,12 @@ async function loadMonthlyAndRender(){
   renderGraph();
 }
 
-// ── ダッシュボード描画 ──────────────────────────────────────
-function renderDB(){
-  const y=viewMonth.getFullYear(),mo=viewMonth.getMonth()+1;
-  document.getElementById('month-nav-lbl').textContent=`${y}年${mo}月`;
-  document.getElementById('db-sub').textContent=`${y}年${mo}月`;
-  renderRanking();
-  renderSeiyakuRanking();
-  renderTable();
-  renderGenreTable();
-  if(graphPeriod==='daily') renderGraph();
-  renderCal();
-}
-
-function renderRanking(){
-  const ranked=[...MEMBERS].map(m=>({...m,apo:monthData[m.name]?monthData[m.name].apo:0}))
-    .sort((a,b)=>b.apo-a.apo);
-  const maxVal=Math.max(...ranked.map(r=>r.apo),1);
-  const medals=['🥇','🥈','🥉'];
-  const html=ranked.map((r,i)=>{
-    const pct=maxVal>0?Math.max((r.apo/maxVal)*100,0):0;
-    const showIn=pct>=20;
-    return `<div class="rank-row">
-      <div class="rank-medal">${i<3?medals[i]:`${i+1}`}</div>
-      <div class="rank-name">${r.name}</div>
-      <div class="rank-bar-wrap">
-        <div class="rank-bar" style="width:${pct}%;background:${r.color}">
-          ${showIn&&r.apo>0?`<span class="rank-val">${r.apo}件</span>`:''}
-        </div>
-        ${!showIn?`<span class="rank-zero">${r.apo}件</span>`:''}
-      </div>
-    </div>`;
-  }).join('');
-  document.getElementById('ranking-apo').innerHTML=html||'<div style="color:#9E9E9E;text-align:center;padding:12px;font-size:13px">データなし</div>';
-}
-
-function renderSeiyakuRanking(){
-  const ranked=[...MEMBERS].map(m=>({...m,seiyaku:monthData[m.name]?monthData[m.name].seiyaku||0:0}))
-    .sort((a,b)=>b.seiyaku-a.seiyaku);
-  const maxVal=Math.max(...ranked.map(r=>r.seiyaku),1);
-  const medals=['🥇','🥈','🥉'];
-  const html=ranked.map((r,i)=>{
-    const pct=maxVal>0?Math.max((r.seiyaku/maxVal)*100,0):0;
-    const showIn=pct>=20;
-    return `<div class="rank-row">
-      <div class="rank-medal">${i<3?medals[i]:`${i+1}`}</div>
-      <div class="rank-name">${r.name}</div>
-      <div class="rank-bar-wrap">
-        <div class="rank-bar" style="width:${pct}%;background:#7B1FA2">
-          ${showIn&&r.seiyaku>0?`<span class="rank-val">${r.seiyaku}件</span>`:''}
-        </div>
-        ${!showIn?`<span class="rank-zero">${r.seiyaku}件</span>`:''}
-      </div>
-    </div>`;
-  }).join('');
-  document.getElementById('ranking-seiyaku').innerHTML=html||'<div style="color:#9E9E9E;text-align:center;padding:12px;font-size:13px">データなし</div>';
-}
-
-function renderTable(){
-  let tK=0,tT=0,tA=0,tS=0,html='';
-  MEMBERS.forEach(m=>{
-    const d=monthData[m.name]||{kakuden:0,tsuden:0,apo:0,seiyaku:0};
-    const s=d.seiyaku||0;
-    tK+=d.kakuden;tT+=d.tsuden;tA+=d.apo;tS+=s;
-    html+=`<tr>
-      <td><span class="color-badge" style="background:${m.color}"></span>${m.name}</td>
-      <td>${d.kakuden}</td><td>${d.tsuden}</td><td>${d.apo}</td><td>${s}</td>
-      <td>${d.kakuden>0?(d.tsuden/d.kakuden*100).toFixed(1)+'%':'—'}</td>
-      <td>${d.kakuden>0?(d.apo/d.kakuden*100).toFixed(1)+'%':'—'}</td>
-      <td>${d.apo>0?(s/d.apo*100).toFixed(1)+'%':'—'}</td>
-    </tr>`;
-  });
-  html+=`<tr><td>合計</td><td>${tK}</td><td>${tT}</td><td>${tA}</td><td>${tS}</td>
-    <td>${tK>0?(tT/tK*100).toFixed(1)+'%':'—'}</td>
-    <td>${tK>0?(tA/tK*100).toFixed(1)+'%':'—'}</td>
-    <td>${tA>0?(tS/tA*100).toFixed(1)+'%':'—'}</td></tr>`;
-  document.getElementById('db-tbody').innerHTML=html;
-}
-
-function renderGenreTable(){
-  const total=initGenreObj();
-  MEMBERS.forEach(m=>{
-    const gd=genreMonthData[m.name]||initGenreObj();
-    GENRES.forEach(g=>{
-      total[g].kakuden+=(gd[g]||{kakuden:0}).kakuden;
-      total[g].tsuden+=(gd[g]||{tsuden:0}).tsuden;
-      total[g].apo+=(gd[g]||{apo:0}).apo;
-    });
-  });
-  let tK=0,tT=0,tA=0,html='';
-  GENRES.forEach(g=>{
-    const d=total[g];
-    tK+=d.kakuden;tT+=d.tsuden;tA+=d.apo;
-    html+=`<tr>
-      <td>${g}</td>
-      <td>${d.kakuden}</td><td>${d.tsuden}</td><td>${d.apo}</td>
-      <td>${d.kakuden>0?(d.tsuden/d.kakuden*100).toFixed(1)+'%':'—'}</td>
-      <td>${d.kakuden>0?(d.apo/d.kakuden*100).toFixed(1)+'%':'—'}</td>
-    </tr>`;
-  });
-  html+=`<tr><td>合計</td><td>${tK}</td><td>${tT}</td><td>${tA}</td>
-    <td>${tK>0?(tT/tK*100).toFixed(1)+'%':'—'}</td>
-    <td>${tK>0?(tA/tK*100).toFixed(1)+'%':'—'}</td></tr>`;
-  document.getElementById('genre-tbody').innerHTML=html;
-}
-
-function renderCal(){
-  const y=viewMonth.getFullYear(),mo=viewMonth.getMonth();
-  const first=new Date(y,mo,1);
-  const last=new Date(y,mo+1,0);
-  const todayStr=dateKey(new Date());
-  const hdrs=['日','月','火','水','木','金','土'];
-  let html=hdrs.map((d,i)=>`<div class="cal-hdr${i===0?' sun':i===6?' sat':''}">${d}</div>`).join('');
-  for(let i=0;i<first.getDay();i++) html+=`<div class="cal-cell empty"></div>`;
-  for(let day=1;day<=last.getDate();day++){
-    const d=new Date(y,mo,day);
-    const dk=dateKey(d);
-    const dow=d.getDay();
-    let totalApo=0;
-    const dots=[];
-    MEMBERS.forEach(m=>{
-      const v=dailyData[m.name]&&dailyData[m.name][dk];
-      if(v&&v.apo>0){totalApo+=v.apo;dots.push(m.color);}
-    });
-    const cls=['cal-cell',dk===todayStr?'today':'',dow===0?'sun':'',dow===6?'sat':''].filter(Boolean).join(' ');
-    html+=`<div class="${cls}" onclick="openDay('${dk}')">
-      <div class="cal-day">${day}</div>
-      ${totalApo>0?`<div class="cal-apo">${totalApo}</div><div class="cal-lbl">アポ</div>`:''}
-      ${dots.length>0?`<div class="cal-dots">${dots.map(c=>`<div class="cal-dot" style="background:${c}"></div>`).join('')}</div>`:''}
-    </div>`;
-  }
-  document.getElementById('cal-grid').innerHTML=html;
-}
-
-// ── 日別詳細 ────────────────────────────────────────────────
-function openDay(dk){
-  const [dy,dm,dd]=dk.split('-').map(Number);
-  const d=new Date(dy,dm-1,dd);
-  document.getElementById('day-title').textContent=fmtDate(d);
-  const html=MEMBERS.map(m=>{
-    const v=(dailyData[m.name]&&dailyData[m.name][dk])||{kakuden:0,tsuden:0,apo:0};
-    const ar=v.kakuden>0?(v.apo/v.kakuden*100).toFixed(1)+'%':'—';
-    return `<div class="day-row">
-      <div class="day-dot" style="background:${m.color}"></div>
-      <div class="day-name">${m.name}</div>
-      <div class="day-nums">
-        <div class="day-num"><div class="day-val">${v.kakuden}</div><div class="day-lbl">架電</div></div>
-        <div class="day-num"><div class="day-val">${v.tsuden}</div><div class="day-lbl">通電</div></div>
-        <div class="day-num"><div class="day-val" style="color:${m.color};font-weight:700">${v.apo}</div><div class="day-lbl">アポ</div></div>
-        <div class="day-num"><div class="day-val" style="font-size:13px">${ar}</div><div class="day-lbl">アポ率</div></div>
-      </div>
-    </div>`;
-  }).join('');
-  document.getElementById('day-body').innerHTML=html;
-  document.getElementById('modal-day').classList.remove('hidden');
-}
-
-// ── メンバー管理 ──────────────────────────────────────────
-function openManager(){
-  const html=MEMBERS.map(m=>`<div class="member-row">
-    <label title="クリックして色を変更" style="cursor:pointer;flex-shrink:0;position:relative;width:18px;height:18px;border-radius:50%;display:block">
-      <div id="mdot-${m.name}" style="width:18px;height:18px;border-radius:50%;background:${m.color};pointer-events:none;border:2px solid rgba(0,0,0,.08)"></div>
-      <input type="color" value="${m.color}" style="position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:none;padding:0" onchange="changeMemberColor('${m.name}',this.value)">
-    </label>
-    <div class="member-nm">${m.name}</div>
-    <button class="del-btn" onclick="delMember('${m.name}')">削除</button>
-  </div>`).join('');
-  document.getElementById('member-list').innerHTML=html||'<div style="color:#9E9E9E;font-size:13px;padding:8px 0">メンバーがいません</div>';
-  document.getElementById('new-name').value='';
-  document.getElementById('modal-mgr').classList.remove('hidden');
-}
-function changeMemberColor(name,color){
-  db.ref(`/config/members/${name}/color`).set(color);
-  const dot=document.getElementById(`mdot-${name}`);
-  if(dot) dot.style.background=color;
-  toast(`${name}さんの色を変更しました`);
-}
-function onPickerChange(val){
-  selColor=val;
-  document.getElementById('color-code').value=val;
-  document.getElementById('color-preview').style.background=val;
-}
-function onCodeChange(val){
-  const v=val.startsWith('#')?val:'#'+val;
-  document.getElementById('color-preview').style.background=v;
-  if(/^#[0-9A-Fa-f]{6}$/.test(v)){
-    selColor=v;
-    document.getElementById('color-picker').value=v;
-  }
-}
-function addMember(){
-  const name=document.getElementById('new-name').value.trim();
-  if(!name){toast('名前を入力してください');return;}
-  if(MEMBERS.find(m=>m.name===name)){toast('同名のメンバーがいます');return;}
-  db.ref(`/config/members/${name}`).set({name,color:selColor,order:MEMBERS.length});
-  document.getElementById('modal-mgr').classList.add('hidden');
-  toast(`${name}さんを追加しました`);
-}
-function delMember(name){
-  document.getElementById('modal-mgr').classList.add('hidden');
-  openConfirm(
-    `${name}さんを削除しますか？`,
-    '実績データは残ります。\nメンバーリストから取り除かれます。',
-    ()=>{
-      db.ref(`/config/members/${name}`).remove();
-      toast(`${name}さんを削除しました`);
-    }
-  );
-}
-
-// ── 確認モーダル ──────────────────────────────────────────
-let _confirmCb=null;
-function openConfirm(msg,sub,cb){
-  _confirmCb=cb;
-  document.getElementById('confirm-msg').textContent=msg;
-  document.getElementById('confirm-sub').textContent=sub;
-  document.getElementById('modal-confirm').classList.remove('hidden');
-}
-function confirmYes(){
-  document.getElementById('modal-confirm').classList.add('hidden');
-  if(_confirmCb){_confirmCb();_confirmCb=null;}
-}
-function confirmCancel(){
-  document.getElementById('modal-confirm').classList.add('hidden');
-  _confirmCb=null;
-}
-
-// ── 月移動 ────────────────────────────────────────────────
-function shiftMonth(d){
-  viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+d,1);
-  monthlyCache={};
-  MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
-    dailyData[m.name]={};
-    genreMonthData[m.name]=initGenreObj();
-  });
-  MEMBERS.forEach((_,mi)=>watchMonth(mi));
-  renderDB();
-}
-
-// ── ナビゲーション ────────────────────────────────────────
-function showTab(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  activeTab=id;
-  buildTabs();
-  if(id==='db'){
-    document.getElementById('page-db').classList.add('active');
-    renderDB();
-  } else {
-    const pg=document.getElementById(`page-${id}`);
-    if(pg) pg.classList.add('active');
-    activeDates[id]=activeDates[id]||new Date();
-    const el=document.getElementById(`dlbl-${id}`);
-    if(el) el.textContent=fmtDate(activeDates[id]);
-    watchDay(id);
-  }
-}
-function chgDay(mi,d){
-  const nd=new Date(activeDates[mi]);nd.setDate(nd.getDate()+d);activeDates[mi]=nd;
-  document.getElementById(`dlbl-${mi}`).textContent=fmtDate(nd);
-  watchDay(mi);
-}
-function goToday(mi){
-  activeDates[mi]=new Date();
-  document.getElementById(`dlbl-${mi}`).textContent=fmtDate(activeDates[mi]);
-  watchDay(mi);
-}
-
-// ── Firebase初期化 ────────────────────────────────────────
-firebase.initializeApp(FB);
-db=firebase.database();
-db.ref('.info/connected').on('value',snap=>{
-  const el=document.getElementById('online-dot');
-  if(el) el.classList.toggle('on',!!snap.val());
-});
-watchMembers();
-</script>
-</body>
-</html>
+// ── 前月データ読み込み ────────────────────────────────────────
+async function loadPrevMonthData(){
+  const prev=new Date(viewMonth);prev.setMonth(prev.getMonth()-1);
+  const pfx=monthPfx(prev);
+  const promises=MEMBERS.map(m=>
+    db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~')
+      .once('value').then(snap=>{
+        let kk=0,t=0,a=0,sm=0,sj=0;
+        snap.forEach(c=>{const v=
