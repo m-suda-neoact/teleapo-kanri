@@ -422,7 +422,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
     <div id="seiyaku-member-badge" class="selected-genre-badge"></div>
     <div class="result-grid">
       <button class="result-btn" style="background:#7B1FA2" onclick="recordSeiyaku('media')">
-        <span class="r-icon">🍊</span>
+        <span class="r-icon">📊</span>
         <span class="r-text"><span class="r-label">媒体運用 成約</span><span class="r-sub">求人媒体の契約成立</span></span>
       </button>
       <button class="result-btn" style="background:#1565C0" onclick="recordSeiyaku('jinzai')">
@@ -528,7 +528,7 @@ let _undoCb=null;
 function toast(msg){const el=document.getElementById('toast');el.innerHTML=`<span>${msg}</span>`;el.classList.add('show');clearTimeout(toastT);_undoCb=null;toastT=setTimeout(()=>el.classList.remove('show'),1600);}
 function toastWithUndo(msg,undoCb){
   const el=document.getElementById('toast');
-  el.innerHTML<`<span>${msg}</span><button class="toast-undo" onclick="undoLast()">取り消す</button>`;
+  el.innerHTML=`<span>${msg}</span><button class="toast-undo" onclick="undoLast()">取り消す</button>`;
   el.classList.add('show');clearTimeout(toastT);_undoCb=undoCb;
   toastT=setTimeout(()=>{el.classList.remove('show');_undoCb=null;},5000);
 }
@@ -664,7 +664,7 @@ function buildUI(savedTab){
   buildTabs();
   monthData={};dailyData={};genreMonthData={};
   MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzaiz0};
+    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
     genreMonthData[m.name]=initGenreObj();
   });
@@ -755,7 +755,7 @@ function watchMonth(mi){
     snap.forEach(c=>{
       const v=c.val()||{};
       kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
-      am+=(v.apo_media||0);ajK=(v.apo_jinzai||0);
+      am+=(v.apo_media||0);aj+=(v.apo_jinzai||0);
       sm+=(v.seiyaku_media||0);sj+=(v.seiyaku_jinzai||0);
       const seiyakuDay=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
       daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay};
@@ -821,7 +821,7 @@ function updateStreak(mi){
 }
 
 // ── 今日の目標 ───────────────────────────────────────────────
-function getGoal(mi){return parseInt(localStorage.getItem(`goal-${MEMBERS[mi]?.name}`)||'0');}
+function getGoal(mi){return parseInt(localStorage.getItem(`goal-${MEMBERS[mi]?.name}`)||'0')||0;}
 function editGoal(mi){
   const cur=getGoal(mi);
   const val=prompt(`${MEMBERS[mi].name}さんの1日の架電目標（件数）を入力してください`,cur||'50');
@@ -905,7 +905,7 @@ function recordCall(result,bunnya){
 function openSeiyakuModal(mi){
   _seiyakuMi=mi;
   document.getElementById('seiyaku-member-badge').textContent=MEMBERS[mi].name;
-  document.nt.getElementById('modal-seiyaku').classList.remove('hidden');
+  document.getElementById('modal-seiyaku').classList.remove('hidden');
 }
 function closeSeiyakuModal(){
   document.getElementById('modal-seiyaku').classList.add('hidden');
@@ -1074,7 +1074,7 @@ async function loadMonthlyAndRender(){
   renderGraph();
 }
 
-// ── 前月デーソ読み込み ────────────────────────────────────────
+// ── 前月データ読み込み ────────────────────────────────────────
 async function loadPrevMonthData(){
   const prev=new Date(viewMonth);prev.setMonth(prev.getMonth()-1);
   const pfx=monthPfx(prev);
@@ -1094,7 +1094,7 @@ async function loadPrevMonthData(){
 // ── ダッシュボード描画 ────────────────────────────────────────
 function renderDB(){
   const lbl=document.getElementById('month-nav-lbl');
-  if(lbl) lbl.textContent=`${viewMonth.getFullYear()}�t${viewMonth.getMonth()+1}月`;
+  if(lbl) lbl.textContent=`${viewMonth.getFullYear()}年${viewMonth.getMonth()+1}月`;
   const sub=document.getElementById('db-sub');
   if(sub) sub.textContent=`全${MEMBERS.length}名`;
 
@@ -1112,8 +1112,8 @@ function renderDB(){
       const ar=kk>0?(a/kk*100).toFixed(1)+'%':'—';
       const sr=a>0?(s/a*100).toFixed(1)+'%':'—';
       const diffA=a-(prev.apo||0);
-      const diffBadge=diffA>0?`<span style="color:#4CAF50;font-size:11px">▲${diffA}</span>`:diffA<0?`<span style="color:#F44336;font-size:11px">▼${Math.abs(diffA)}|/span>`:'';
-      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}8/td><td>${t}</td><td>${a}${diffBadge}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
+      const diffBadge=diffA>0?`<span style="color:#4CAF50;font-size:11px">▲${diffA}</span>`:diffA<0?`<span style="color:#F44336;font-size:11px">▼${Math.abs(diffA)}</span>`:'';
+      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}</td><td>${t}</td><td>${a}${diffBadge}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
     });
     if(MEMBERS.length>1){
       const tr2=totKk>0?(totT/totKk*100).toFixed(1)+'%':'—';
@@ -1168,11 +1168,11 @@ function renderDB(){
   const gTbody=document.getElementById('genre-tbody');
   if(gTbody){
     let html='';
-    FENRES.forEach(g=>{
+    GENRES.forEach(g=>{
       let kk=0,t=0,a=0;
-      MEMBERS.forEach(m=>{const gd=genreLonthData[m.name]||{};kk+=(gd[g]?.kakuden||0);t+=(gd[g]?.tsuden||0);a+=(gd[g]?.apo||0);});
+      MEMBERS.forEach(m=>{const gd=genreMonthData[m.name]||{};kk+=(gd[g]?.kakuden||0);t+=(gd[g]?.tsuden||0);a+=(gd[g]?.apo||0);});
       if(kk>0||a>0){
-        html+=`<tr><td>${g}</td><td>${kk}</td><td>${t�</td><td>${a}</td><td>${kk>0?(t/kk*100).toFixed(1)+'%':'—'}</td><td>${kk>0?(a/kk*100).toFixed(1)+'%':'—'}</td></tr>`;
+        html+=`<tr><td>${g}</td><td>${kk}</td><td>${t}</td><td>${a}</td><td>${kk>0?(t/kk*100).toFixed(1)+'%':'—'}</td><td>${kk>0?(a/kk*100).toFixed(1)+'%':'—'}</td></tr>`;
       }
     });
     gTbody.innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:#9E9E9E">データなし</td></tr>';
@@ -1208,11 +1208,11 @@ function renderCalendar(){
 function openDayModal(dk){
   const el=document.getElementById('modal-day');
   const title=document.getElementById('day-title');
-  const body=document.getElementById('day-[ody');
+  const body=document.getElementById('day-body');
   if(!el) return;
   const d=new Date(dk+'T00:00:00');
   if(title) title.textContent=fmtDate(d);
-  \et html='';
+  let html='';
   MEMBERS.forEach(m=>{
     const v=dailyData[m.name]?.[dk]||{};
     const s=(v.seiyaku||0);
@@ -1235,7 +1235,7 @@ function showTab(id){
   activeTab=id;
   localStorage.setItem('activeTab',JSON.stringify(id));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.clQssList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   if(id==='db'){
     const pg=document.getElementById('page-db');
     if(pg) pg.classList.add('active');
@@ -1243,7 +1243,7 @@ function showTab(id){
     if(!prevMonthLoaded) loadPrevMonthData();
   } else if(typeof id==='number'){
     const pg=document.getElementById(`page-${id}`);
-    if(pg) pg.clQssList.add('active');
+    if(pg) pg.classList.add('active');
     watchDay(id);
   }
   buildTabs();
@@ -1345,8 +1345,8 @@ window.onload=function(){
     if(dot) dot.style.background=s.val()?'#4CAF50':'#9E9E9E';
   });
   const savedTab=JSON.parse(localStorage.getItem('activeTab')||'null');
-  watchMembers();
-  // savedTabはwatchMembersコールバック内のbuildUIで使用
+  watchMembers();
+  // savedTabはwatchMembersコールバック内のbuildUIで使用
   window._savedTab=savedTab;
 };
 </script>
