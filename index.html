@@ -300,7 +300,6 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
           </table>
         </div>
       </div>
-      <div id="best-genre-area"></div>
     </div>
 
     <!-- 右カラム -->
@@ -1107,19 +1106,23 @@ function renderDB(){
       const d=monthData[m.name]||{};
       const prev=prevMonthData[m.name]||{};
       const kk=d.kakuden||0,t=d.tsuden||0,a=d.apo||0,s=d.seiyaku||0;
+      const am=d.apo_media||0,aj=d.apo_jinzai||0;
       totKk+=kk;totT+=t;totA+=a;totS+=s;
       const tr=kk>0?(t/kk*100).toFixed(1)+'%':'—';
       const ar=kk>0?(a/kk*100).toFixed(1)+'%':'—';
       const sr=a>0?(s/a*100).toFixed(1)+'%':'—';
       const diffA=a-(prev.apo||0);
       const diffBadge=diffA>0?`<span style="color:#4CAF50;font-size:11px">▲${diffA}</span>`:diffA<0?`<span style="color:#F44336;font-size:11px">▼${Math.abs(diffA)}</span>`:'';
-      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}</td><td>${t}</td><td>${a}${diffBadge}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
+      const apoSub=(am>0||aj>0)?`<br><span style="font-size:10px;color:#9E9E9E;font-weight:400">媒${am}/人${aj}</span>`:'';
+      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}</td><td>${t}</td><td>${a}${diffBadge}${apoSub}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
     });
     if(MEMBERS.length>1){
       const tr2=totKk>0?(totT/totKk*100).toFixed(1)+'%':'—';
       const ar2=totKk>0?(totA/totKk*100).toFixed(1)+'%':'—';
       const sr2=totA>0?(totS/totA*100).toFixed(1)+'%':'—';
-      rows+=`<tr style="font-weight:700;border-top:2px solid #EEE"><td>合計</td><td>${totKk}</td><td>${totT}</td><td>${totA}</td><td style="color:#7B1FA2">${totS}</td><td>${tr2}</td><td>${ar2}</td><td>${sr2}</td></tr>`;
+      let totAm=0,totAj=0;MEMBERS.forEach(m=>{totAm+=(monthData[m.name]?.apo_media||0);totAj+=(monthData[m.name]?.apo_jinzai||0);});
+      const totApoSub=(totAm>0||totAj>0)?`<br><span style="font-size:10px;color:#9E9E9E;font-weight:400">媒${totAm}/人${totAj}</span>`:'';
+      rows+=`<tr style="font-weight:700;border-top:2px solid #EEE"><td>合計</td><td>${totKk}</td><td>${totT}</td><td>${totA}${totApoSub}</td><td style="color:#7B1FA2">${totS}</td><td>${tr2}</td><td>${ar2}</td><td>${sr2}</td></tr>`;
     }
     tbody.innerHTML=rows;
   }
@@ -1144,24 +1147,6 @@ function renderDB(){
       const medals=['🥇','🥈','🥉'];
       return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F5F5F5"><span style="font-size:16px">${medals[i]||'　'}</span><span style="color:${m.color};font-weight:700">${m.name}</span><span style="margin-left:auto;font-weight:700;font-size:18px;color:#7B1FA2">${v}</span></div>`;
     }).join('');
-  }
-
-  // ベストジャンル
-  const bgEl=document.getElementById('best-genre-area');
-  if(bgEl){
-    let bestGenre=null,bestApo=0,bestMember='';
-    MEMBERS.forEach(m=>{
-      const gd=genreMonthData[m.name]||{};
-      GENRES.forEach(g=>{
-        const a=(gd[g]?.apo||0);
-        if(a>bestApo){bestApo=a;bestGenre=g;bestMember=m.name;}
-      });
-    });
-    if(bestGenre&&bestApo>0){
-      bgEl.innerHTML=`<div style="background:#FFF8E1;border-radius:12px;padding:12px 16px;margin-bottom:14px;border:1px solid #FFE082"><span style="font-size:12px;color:#F9A825;font-weight:700">⭐ 今月のベストジャンル</span><div style="margin-top:6px;font-weight:700">${bestMember} - ${bestGenre} <span style="color:#FF6F00">${bestApo}アポ</span></div></div>`;
-    } else {
-      bgEl.innerHTML='';
-    }
   }
 
   // 職種別集計
