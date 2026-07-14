@@ -757,7 +757,7 @@ function watchMonth(mi){
       am+=(v.apo_media||0);aj+=(v.apo_jinzai||0);
       sm+=(v.seiyaku_media||0);sj+=(v.seiyaku_jinzai||0);
       const seiyakuDay=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
-      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay};
+      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay,apo_media:v.apo_media||0,apo_jinzai:v.apo_jinzai||0,seiyaku_media:v.seiyaku_media||0,seiyaku_jinzai:v.seiyaku_jinzai||0};
       if(v.genre){
         Object.entries(v.genre).forEach(([g,gv])=>{
           if(genre[g]){genre[g].kakuden+=(gv.kakuden||0);genre[g].tsuden+=(gv.tsuden||0);genre[g].apo+=(gv.apo||0);}
@@ -1200,15 +1200,54 @@ function openDayModal(dk){
   const body=document.getElementById('day-body');
   if(!el) return;
   const d=new Date(dk+'T00:00:00');
-  if(title) title.textContent=fmtDate(d);
+  if(title) title.textContent=fmtDate(d)+' 内訳修正';
   let html='';
-  MEMBERS.forEach(m=>{
+  MEMBERS.forEach((m,mi)=>{
     const v=dailyData[m.name]?.[dk]||{};
-    const s=(v.seiyaku||0);
-    html+=`<div style="padding:10px 0;border-bottom:1px solid #F5F5F5"><span style="color:${m.color};font-weight:700">${m.name}</span><span style="margin-left:12px">架電:${v.kakuden||0} 通電:${v.tsuden||0} アポ:${v.apo||0} 成約:${s}</span></div>`;
+    const s=v.seiyaku||0;
+    const am=v.apo_media||0,aj=v.apo_jinzai||0;
+    const sm=v.seiyaku_media||0,sj=v.seiyaku_jinzai||0;
+    html+=`<div style="padding:10px 0;border-bottom:1px solid #F5F5F5">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="color:${m.color};font-weight:700">${m.name}</span>
+        <span style="font-size:12px;color:#757575">架電:${v.kakuden||0} 通電:${v.tsuden||0} アポ:${v.apo||0} 成約:${s}</span>
+      </div>
+      <div style="background:#F9F9F9;border-radius:8px;padding:8px 10px;font-size:13px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="color:#555;width:36px;font-size:12px;font-weight:600">アポ</span>
+          <span style="color:#888;font-size:12px">媒体</span>
+          <input type="number" id="ed-am-${mi}" value="${am}" min="0" max="${v.apo||0}" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
+          <span style="color:#888;font-size:12px">人材</span>
+          <input type="number" id="ed-aj-${mi}" value="${aj}" min="0" max="${v.apo||0}" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="color:#555;width:36px;font-size:12px;font-weight:600">成約</span>
+          <span style="color:#888;font-size:12px">媒体</span>
+          <input type="number" id="ed-sm-${mi}" value="${sm}" min="0" max="${s}" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
+          <span style="color:#888;font-size:12px">人材</span>
+          <input type="number" id="ed-sj-${mi}" value="${sj}" min="0" max="${s}" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
+        </div>
+      </div>
+    </div>`;
   });
+  html+=`<button onclick="saveDayEdit('${dk}')" style="width:100%;margin-top:14px;padding:13px;background:#4CAF50;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">💾 保存する</button>`;
   if(body) body.innerHTML=html||'<div style="color:#9E9E9E;padding:16px">データなし</div>';
   el.classList.remove('hidden');
+}
+
+function saveDayEdit(dk){
+  if(!db) return;
+  const saves=MEMBERS.map((m,mi)=>{
+    const am=Math.max(0,parseInt(document.getElementById(`ed-am-${mi}`)?.value)||0);
+    const aj=Math.max(0,parseInt(document.getElementById(`ed-aj-${mi}`)?.value)||0);
+    const sm=Math.max(0,parseInt(document.getElementById(`ed-sm-${mi}`)?.value)||0);
+    const sj=Math.max(0,parseInt(document.getElementById(`ed-sj-${mi}`)?.value)||0);
+    return db.ref(`/members/${m.name}/${dk}`).update({apo_media:am,apo_jinzai:aj,seiyaku_media:sm,seiyaku_jinzai:sj});
+  });
+  Promise.all(saves).then(()=>{
+    toast('✅ 保存しました');
+    document.getElementById('modal-day').classList.add('hidden');
+  }).catch(e=>toast('エラー: '+e.message));
 }
 
 function toggleGenreAcc(){
@@ -1261,68 +1300,4 @@ function shiftMonth(delta){
   MEMBERS.forEach(m=>{
     monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
-    genreMonthData[m.name]=initGenreObj();
-  });
-  startListeners();
-  loadPrevMonthData();
-}
-
-// ── 確認モーダル ──────────────────────────────────────────────
-let _confirmCb=null;
-function openConfirm(msg,sub,cb){
-  document.getElementById('confirm-msg').textContent=msg;
-  document.getElementById('confirm-sub').textContent=sub||'';
-  _confirmCb=cb;
-  document.getElementById('modal-confirm').classList.remove('hidden');
-}
-function confirmYes(){
-  document.getElementById('modal-confirm').classList.add('hidden');
-  if(_confirmCb){_confirmCb();_confirmCb=null;}
-}
-function confirmCancel(){
-  document.getElementById('modal-confirm').classList.add('hidden');
-  _confirmCb=null;
-}
-
-// ── メンバー管理 ──────────────────────────────────────────────
-function openManager(){
-  const list=document.getElementById('member-list');
-  if(list){
-    list.innerHTML=MEMBERS.map((m,i)=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F5F5F5">
-        <div style="width:14px;height:14px;border-radius:50%;background:${m.color};flex-shrink:0"></div>
-        <span style="flex:1;font-weight:700">${m.name}</span>
-        <button onclick="deleteMember('${m.name}')" style="background:#F44336;color:#fff;border:none;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer">削除</button>
-      </div>`).join('');
-  }
-  document.getElementById('modal-mgr').classList.remove('hidden');
-}
-function deleteMember(name){
-  if(!db) return;
-  openConfirm(`「${name}」を削除しますか？`,`このメンバーのデータはすべて削除されます`,()=>{
-    db.ref(`/config/members/${name}`).remove();
-    toast(`${name}を削除しました`);
-  });
-}
-function onPickerChange(v){
-  selColor=v;
-  document.getElementById('color-preview').style.background=v;
-  document.getElementById('color-code').value=v;
-}
-function onCodeChange(v){
-  if(/^#[0-9A-Fa-f]{6}$/.test(v)){
-    selColor=v;
-    document.getElementById('color-preview').style.background=v;
-    document.getElementById('color-picker').value=v;
-  }
-}
-function addMember(){
-  const name=document.getElementById('new-name').value.trim();
-  if(!name||!db){toast('名前を入力してください');return;}
-  if(MEMBERS.find(m=>m.name===name)){toast('同じ名前のメンバーが既にいます');return;}
-  db.ref(`/config/members/${name}`).set({name,color:selColor,order:MEMBERS.length});
-  document.getElementById('new-name').value='';
-  toast(`${name}を追加しました`);
-}
-
-// ── 初期化 ───────────────────────────────────────────────�
+    genreMonthData[m.name]=initGenreObj()
