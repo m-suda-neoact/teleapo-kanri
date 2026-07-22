@@ -295,7 +295,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
         <div class="section-label">📊 月間集計</div>
         <div class="db-card">
           <table class="db-table">
-            <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>成約</th><th>通電率</th><th>アポ率</th><th>成約率</th></tr></thead>
+            <thead><tr><th>メンバー</th><th>架電</th><th>通電</th><th>アポ</th><th>商談</th><th>成約</th><th>通電率</th><th>アポ率</th><th>成約率</th></tr></thead>
             <tbody id="db-tbody"></tbody>
           </table>
         </div>
@@ -611,6 +611,16 @@ function buildUI(savedTab){
 
       <div class="counter-card">
         <div class="counter-top">
+          <div><div class="counter-label">商談数</div></div>
+          <div class="counter-num" style="color:#FF9800" id="num-${mi}-shidan">0</div>
+        </div>
+        <div class="counter-btns">
+          <button class="btn-plus" style="background:#FF9800" onclick="recordShidan(${mi})">＋ 商談を記録</button>
+        </div>
+      </div>
+
+      <div class="counter-card">
+        <div class="counter-top">
           <div><div class="counter-label">成約数</div></div>
           <div class="counter-num" style="color:#7B1FA2" id="num-${mi}-3">0</div>
         </div>
@@ -647,10 +657,10 @@ function buildUI(savedTab){
       <div class="month-strip" style="background:${m.color}18;border-color:${m.color}30">
         <div style="padding:16px 20px">
           <div class="strip-title">月間合計 <span style="font-weight:400;color:#9E9E9E" id="strip-month-${mi}"></span></div>
-          <div class="strip-grid" style="grid-template-columns:repeat(6,1fr)">
-            ${[['kakuden','架電'],['tsuden','通電'],['apo','アポ'],['seiyaku','成約'],['trate','通電率'],['arate','アポ率']].map(([k,lbl])=>`
+          <div class="strip-grid" style="grid-template-columns:repeat(4,1fr);gap:4px 0">
+            ${[['kakuden','架電'],['tsuden','通電'],['apo','アポ'],['shidan','商談'],['seiyaku','成約'],['trate','通電率'],['arate','アポ率']].map(([k,lbl])=>`
             <div class="strip-item">
-              <div class="strip-num" style="color:${k==='seiyaku'?'#7B1FA2':m.color}" id="m-${k}-${mi}">0</div>
+              <div class="strip-num" style="color:${k==='seiyaku'?'#7B1FA2':k==='shidan'?'#FF9800':m.color}" id="m-${k}-${mi}">0</div>
               <div class="strip-lbl">${lbl}</div>
             </div>`).join('')}
           </div>
@@ -663,7 +673,7 @@ function buildUI(savedTab){
   buildTabs();
   monthData={};dailyData={};genreMonthData={};
   MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
+    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,shidan:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
     genreMonthData[m.name]=initGenreObj();
   });
@@ -730,6 +740,8 @@ function watchDay(mi){
     document.getElementById(`num-${mi}-0`).textContent=v.kakuden||0;
     document.getElementById(`num-${mi}-1`).textContent=v.tsuden||0;
     document.getElementById(`num-${mi}-2`).textContent=v.apo||0;
+    const nsd=document.getElementById(`num-${mi}-shidan`);
+    if(nsd) nsd.textContent=v.shidan||0;
     const s3=document.getElementById(`num-${mi}-3`);
     if(s3) s3.textContent=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
     const kk=v.kakuden||0,t=v.tsuden||0,a=v.apo||0;
@@ -749,15 +761,16 @@ function watchMonth(mi){
   const pfx=monthPfx(viewMonth);
   const ref=db.ref(`/members/${m.name}`).orderByKey().startAt(pfx).endAt(pfx+'~');
   const fn=snap=>{
-    let kk=0,t=0,a=0,am=0,aj=0,sm=0,sj=0;
+    let kk=0,t=0,a=0,am=0,aj=0,sd=0,sm=0,sj=0;
     const daily={};const genre=initGenreObj();
     snap.forEach(c=>{
       const v=c.val()||{};
       kk+=v.kakuden||0;t+=v.tsuden||0;a+=v.apo||0;
       am+=(v.apo_media||0);aj+=(v.apo_jinzai||0);
+      sd+=(v.shidan||0);
       sm+=(v.seiyaku_media||0);sj+=(v.seiyaku_jinzai||0);
       const seiyakuDay=(v.seiyaku_media||0)+(v.seiyaku_jinzai||0);
-      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,seiyaku:seiyakuDay,apo_media:v.apo_media||0,apo_jinzai:v.apo_jinzai||0,seiyaku_media:v.seiyaku_media||0,seiyaku_jinzai:v.seiyaku_jinzai||0};
+      daily[c.key]={kakuden:v.kakuden||0,tsuden:v.tsuden||0,apo:v.apo||0,shidan:v.shidan||0,seiyaku:seiyakuDay,apo_media:v.apo_media||0,apo_jinzai:v.apo_jinzai||0,seiyaku_media:v.seiyaku_media||0,seiyaku_jinzai:v.seiyaku_jinzai||0};
       if(v.genre){
         Object.entries(v.genre).forEach(([g,gv])=>{
           if(genre[g]){genre[g].kakuden+=(gv.kakuden||0);genre[g].tsuden+=(gv.tsuden||0);genre[g].apo+=(gv.apo||0);}
@@ -765,7 +778,7 @@ function watchMonth(mi){
       }
     });
     const seiyaku=sm+sj;
-    monthData[m.name]={kakuden:kk,tsuden:t,apo:a,apo_media:am,apo_jinzai:aj,seiyaku,seiyaku_media:sm,seiyaku_jinzai:sj};
+    monthData[m.name]={kakuden:kk,tsuden:t,apo:a,apo_media:am,apo_jinzai:aj,shidan:sd,seiyaku,seiyaku_media:sm,seiyaku_jinzai:sj};
     dailyData[m.name]=daily;
     genreMonthData[m.name]=genre;
     const el=document.getElementById(`m-kakuden-${mi}`);
@@ -773,6 +786,8 @@ function watchMonth(mi){
       document.getElementById(`m-kakuden-${mi}`).textContent=kk;
       document.getElementById(`m-tsuden-${mi}`).textContent=t;
       document.getElementById(`m-apo-${mi}`).textContent=a;
+      const msd=document.getElementById(`m-shidan-${mi}`);
+      if(msd) msd.textContent=sd;
       const ms=document.getElementById(`m-seiyaku-${mi}`);
       if(ms) ms.textContent=seiyaku;
       document.getElementById(`m-trate-${mi}`).textContent=kk>0?(t/kk*100).toFixed(1)+'%':'—';
@@ -924,6 +939,15 @@ function recordSeiyaku(bunnya){
   closeSeiyakuModal();
 }
 
+function recordShidan(mi){
+  if(!db||mi>=MEMBERS.length) return;
+  const m=MEMBERS[mi];
+  const dk=dateKey(activeDates[mi]);
+  db.ref(`/members/${m.name}/${dk}`).child('shidan').transaction(c=>Math.max(0,(c||0)+1));
+  const undoCb=()=>db.ref(`/members/${m.name}/${dk}`).child('shidan').transaction(c=>Math.max(0,(c||0)-1));
+  toastWithUndo('📋 商談 +1',undoCb);
+}
+
 function resetDay(mi){
   if(!db) return;
   openConfirm(
@@ -931,7 +955,7 @@ function resetDay(mi){
     `${fmtDate(activeDates[mi])} の\n全データをリセットします`,
     ()=>{
       db.ref(`/members/${MEMBERS[mi].name}/${dateKey(activeDates[mi])}`).set({
-        kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku_media:0,seiyaku_jinzai:0,genre:{}
+        kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,shidan:0,seiyaku_media:0,seiyaku_jinzai:0,genre:{}
       });
       toast('リセットしました');
     }
@@ -1105,7 +1129,7 @@ function renderDB(){
     MEMBERS.forEach((m,mi)=>{
       const d=monthData[m.name]||{};
       const prev=prevMonthData[m.name]||{};
-      const kk=d.kakuden||0,t=d.tsuden||0,a=d.apo||0,s=d.seiyaku||0;
+      const kk=d.kakuden||0,t=d.tsuden||0,a=d.apo||0,sd=d.shidan||0,s=d.seiyaku||0;
       const am=d.apo_media||0,aj=d.apo_jinzai||0;
       totKk+=kk;totT+=t;totA+=a;totS+=s;
       const tr=kk>0?(t/kk*100).toFixed(1)+'%':'—';
@@ -1114,15 +1138,15 @@ function renderDB(){
       const diffA=a-(prev.apo||0);
       const diffBadge=diffA>0?`<span style="color:#4CAF50;font-size:11px">▲${diffA}</span>`:diffA<0?`<span style="color:#F44336;font-size:11px">▼${Math.abs(diffA)}</span>`:'';
       const apoSub=(am>0||aj>0)?`<br><span style="font-size:10px;color:#9E9E9E;font-weight:400">媒${am}/人${aj}</span>`:'';
-      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}</td><td>${t}</td><td>${a}${diffBadge}${apoSub}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
+      rows+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:6px"></span>${m.name}</td><td>${kk}</td><td>${t}</td><td>${a}${diffBadge}${apoSub}</td><td style="color:#FF9800;font-weight:700">${sd}</td><td style="color:#7B1FA2;font-weight:700">${s}</td><td>${tr}</td><td>${ar}</td><td>${sr}</td></tr>`;
     });
     if(MEMBERS.length>1){
       const tr2=totKk>0?(totT/totKk*100).toFixed(1)+'%':'—';
       const ar2=totKk>0?(totA/totKk*100).toFixed(1)+'%':'—';
       const sr2=totA>0?(totS/totA*100).toFixed(1)+'%':'—';
-      let totAm=0,totAj=0;MEMBERS.forEach(m=>{totAm+=(monthData[m.name]?.apo_media||0);totAj+=(monthData[m.name]?.apo_jinzai||0);});
+      let totAm=0,totAj=0,totSd=0;MEMBERS.forEach(m=>{totAm+=(monthData[m.name]?.apo_media||0);totAj+=(monthData[m.name]?.apo_jinzai||0);totSd+=(monthData[m.name]?.shidan||0);});
       const totApoSub=(totAm>0||totAj>0)?`<br><span style="font-size:10px;color:#9E9E9E;font-weight:400">媒${totAm}/人${totAj}</span>`:'';
-      rows+=`<tr style="font-weight:700;border-top:2px solid #EEE"><td>合計</td><td>${totKk}</td><td>${totT}</td><td>${totA}${totApoSub}</td><td style="color:#7B1FA2">${totS}</td><td>${tr2}</td><td>${ar2}</td><td>${sr2}</td></tr>`;
+      rows+=`<tr style="font-weight:700;border-top:2px solid #EEE"><td>合計</td><td>${totKk}</td><td>${totT}</td><td>${totA}${totApoSub}</td><td style="color:#FF9800">${totSd}</td><td style="color:#7B1FA2">${totS}</td><td>${tr2}</td><td>${ar2}</td><td>${sr2}</td></tr>`;
     }
     tbody.innerHTML=rows;
   }
@@ -1210,7 +1234,7 @@ function openDayModal(dk){
     html+=`<div style="padding:10px 0;border-bottom:1px solid #F5F5F5">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
         <span style="color:${m.color};font-weight:700">${m.name}</span>
-        <span style="font-size:12px;color:#757575">架電:${v.kakuden||0} 通電:${v.tsuden||0} アポ:${v.apo||0} 成約:${s}</span>
+        <span style="font-size:12px;color:#757575">架電:${v.kakuden||0} 通電:${v.tsuden||0} アポ:${v.apo||0} 商談:${v.shidan||0} 成約:${s}</span>
       </div>
       <div style="background:#F9F9F9;border-radius:8px;padding:8px 10px;font-size:13px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
@@ -1298,7 +1322,7 @@ function shiftMonth(delta){
   prevMonthData={};
   monthlyCache={};
   MEMBERS.forEach(m=>{
-    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
+    monthData[m.name]={kakuden:0,tsuden:0,apo:0,apo_media:0,apo_jinzai:0,shidan:0,seiyaku:0,seiyaku_media:0,seiyaku_jinzai:0};
     dailyData[m.name]={};
     genreMonthData[m.name]=initGenreObj();
   });
