@@ -1244,6 +1244,11 @@ function openDayModal(dk){
           <span style="color:#888;font-size:12px">人材</span>
           <input type="number" id="ed-aj-${mi}" value="${aj}" min="0" max="${v.apo||0}" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
         </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="color:#FF9800;width:36px;font-size:12px;font-weight:600">商談</span>
+          <input type="number" id="ed-sd-${mi}" value="${v.shidan||0}" min="0" style="width:48px;border:1px solid #CCC;border-radius:4px;padding:3px 6px;font-size:13px;text-align:center">
+          <span style="color:#AAA;font-size:11px">件</span>
+        </div>
         <div style="display:flex;align-items:center;gap:8px">
           <span style="color:#555;width:36px;font-size:12px;font-weight:600">成約</span>
           <span style="color:#888;font-size:12px">媒体</span>
@@ -1264,9 +1269,10 @@ function saveDayEdit(dk){
   const saves=MEMBERS.map((m,mi)=>{
     const am=Math.max(0,parseInt(document.getElementById(`ed-am-${mi}`)?.value)||0);
     const aj=Math.max(0,parseInt(document.getElementById(`ed-aj-${mi}`)?.value)||0);
+    const sd=Math.max(0,parseInt(document.getElementById(`ed-sd-${mi}`)?.value)||0);
     const sm=Math.max(0,parseInt(document.getElementById(`ed-sm-${mi}`)?.value)||0);
     const sj=Math.max(0,parseInt(document.getElementById(`ed-sj-${mi}`)?.value)||0);
-    return db.ref(`/members/${m.name}/${dk}`).update({apo_media:am,apo_jinzai:aj,seiyaku_media:sm,seiyaku_jinzai:sj});
+    return db.ref(`/members/${m.name}/${dk}`).update({apo_media:am,apo_jinzai:aj,shidan:sd,seiyaku_media:sm,seiyaku_jinzai:sj});
   });
   Promise.all(saves).then(()=>{
     toast('✅ 保存しました');
