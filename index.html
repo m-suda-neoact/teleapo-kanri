@@ -735,8 +735,8 @@ function buildTabs(){
   });
   const miniBtn=document.createElement('button');
   miniBtn.className='mini-float-btn';
-  miniBtn.textContent='⊡';
-  miniBtn.title='ミニウィンドウで開く';
+  miniBtn.innerHTML='⊡ <span style="font-size:10px">mini</span>';
+  miniBtn.title='クリックでミニウィンドウを表示（小画面化）';
   miniBtn.onclick=()=>window.open('https://sweet-cat-539d37.netlify.app/mini.html','teleapo-mini','width=290,height=470,left='+(screen.availWidth-300)+',top='+(screen.availHeight-480));
   bar.appendChild(miniBtn);
 }
