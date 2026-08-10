@@ -7,44 +7,47 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#1a1a2e;color:#fff;width:290px;min-height:460px;overflow-x:hidden;user-select:none}
-.hdr{background:#16213e;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
-.hdr-title{font-size:14px;font-weight:700}
-.hdr-date{font-size:11px;opacity:.6}
+.hdr{background:#16213e;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
+.hdr-title{font-size:13px;font-weight:700}
+.date-ctrl{display:flex;align-items:center;gap:3px}
+.date-arrow{background:rgba(255,255,255,.12);border:none;color:#fff;width:22px;height:22px;border-radius:5px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;line-height:1}
+.date-arrow:active{background:rgba(255,255,255,.3)}
+.date-label{font-size:10px;opacity:.75;min-width:80px;text-align:center}
 .member-tabs{display:flex;background:#0f3460;overflow-x:auto;scrollbar-width:none}
 .member-tabs::-webkit-scrollbar{display:none}
 .mtab{flex:1;padding:8px 4px;text-align:center;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;opacity:.55;transition:all .15s}
 .mtab.active{opacity:1;font-weight:700}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 10px 8px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 10px 6px}
 .stat-card{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 6px;text-align:center;border:1px solid rgba(255,255,255,.08)}
-.stat-num{font-size:26px;font-weight:700;line-height:1.1}
+.stat-num{font-size:24px;font-weight:700;line-height:1.1}
 .stat-sub{font-size:10px;opacity:.6;margin-top:2px}
-.progress-wrap{padding:0 10px 10px}
+.progress-wrap{padding:0 10px 8px}
 .progress-bar-bg{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
 .progress-bar-fill{height:100%;border-radius:2px;transition:width .3s ease}
 .progress-label{font-size:10px;opacity:.5;margin-top:4px;text-align:right}
-.action-area{padding:0 10px 8px}
-.record-btn{width:100%;padding:12px;border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.3px}
-.record-btn:active{opacity:.8}
-.quick-area{padding:0 10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.quick-btn{padding:8px 4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:rgba(255,255,255,.8);font-size:11px;cursor:pointer;text-align:center;transition:background .15s}
-.quick-btn:active{background:rgba(255,255,255,.2)}
+.section-label{font-size:9px;font-weight:700;letter-spacing:.7px;opacity:.45;text-transform:uppercase;padding:2px 10px 5px}
+.genre-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 10px 12px}
+.genre-btn{padding:11px 6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:10px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:background .15s;line-height:1.3}
+.genre-btn:active{background:rgba(255,255,255,.25)}
+.genre-btn.full{grid-column:1/-1;padding:9px 6px}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:flex-end}
 .modal-overlay.open{display:flex}
-.modal-sheet{background:#1e2a4a;width:100%;border-radius:16px 16px 0 0;padding:16px 12px 20px}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.modal-head-title{font-size:15px;font-weight:700}
-.modal-close-btn{width:28px;height:28px;background:rgba(255,255,255,.1);border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.result-rows{display:flex;flex-direction:column;gap:7px}
-.result-row{display:flex;align-items:center;gap:10px;border-radius:10px;padding:9px 12px}
-.r-icon{font-size:18px;flex-shrink:0}
+.modal-sheet{background:#1e2a4a;width:100%;border-radius:16px 16px 0 0;padding:14px 12px 18px}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.modal-head-title{font-size:14px;font-weight:700}
+.modal-head-sub{font-size:10px;opacity:.55;margin-top:2px}
+.modal-close-btn{width:28px;height:28px;background:rgba(255,255,255,.1);border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.result-rows{display:flex;flex-direction:column;gap:6px}
+.result-row{display:flex;align-items:center;gap:8px;border-radius:10px;padding:8px 10px}
+.r-icon{font-size:16px;flex-shrink:0}
 .r-text{flex:1}
-.r-label{font-size:12px;font-weight:600}
-.r-sub{font-size:10px;opacity:.55;margin-top:1px}
-.cnt-ctrl{display:flex;align-items:center;gap:5px;flex-shrink:0}
-.cnt-btn{width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.r-label{font-size:11px;font-weight:600}
+.r-sub{font-size:9px;opacity:.55;margin-top:1px}
+.cnt-ctrl{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.cnt-btn{width:26px;height:26px;border:none;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 .cnt-btn:active{background:rgba(255,255,255,.45)}
-.cnt-val{min-width:22px;text-align:center;font-size:17px;font-weight:700}
-.save-btn{margin-top:12px;width:100%;padding:12px;border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.cnt-val{min-width:20px;text-align:center;font-size:16px;font-weight:700}
+.save-btn{margin-top:10px;width:100%;padding:11px;border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s}
 .save-btn:active{opacity:.8}
 .toast{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);color:#1a1a2e;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:200}
 .toast.show{opacity:1}
@@ -55,7 +58,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="hdr">
   <div class="hdr-title">📞 テレアポ実績</div>
-  <div class="hdr-date" id="today-label">--</div>
+  <div class="date-ctrl">
+    <button class="date-arrow" onclick="shiftDate(-1)">‹</button>
+    <div class="date-label" id="date-label">--</div>
+    <button class="date-arrow" onclick="shiftDate(1)">›</button>
+  </div>
 </div>
 
 <div class="member-tabs" id="member-tabs">
@@ -85,21 +92,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="progress-label" id="progress-label"></div>
   </div>
 
-  <div class="action-area">
-    <button class="record-btn" id="record-btn" onclick="openModal()">＋ 結果を選択</button>
-  </div>
-
-  <div class="quick-area">
-    <button class="quick-btn" onclick="quickAdd('kakuden_only')">📞 架電のみ ＋1</button>
-    <button class="quick-btn" onclick="quickAdd('tsuden')">🗣️ 通電 ＋1</button>
+  <div class="section-label">業種を選んで入力</div>
+  <div class="genre-grid">
+    <button class="genre-btn" onclick="openModal('IT')">💻 IT</button>
+    <button class="genre-btn" onclick="openModal('営業')">📈 営業</button>
+    <button class="genre-btn" onclick="openModal('建築')">🏗️ 建築</button>
+    <button class="genre-btn" onclick="openModal('接客')">🛎️ 接客</button>
+    <button class="genre-btn full" onclick="openModal('その他')">その他</button>
   </div>
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="genre-modal">
   <div class="modal-sheet">
     <div class="modal-head">
-      <span class="modal-head-title">結果を選択</span>
+      <div>
+        <div class="modal-head-title">結果を選択</div>
+        <div class="modal-head-sub" id="modal-genre-label"></div>
+      </div>
       <button class="modal-close-btn" onclick="closeModal()">×</button>
     </div>
     <div class="result-rows">
@@ -160,11 +169,31 @@ firebase.initializeApp({
 });
 const db=firebase.database();
 const DEFAULT_MEMBERS=[{name:'三五',color:'#8BC34A'},{name:'中山',color:'#29B6F6'},{name:'藤田',color:'#F4511E'}];
-let MEMBERS=[],activeMi=0,todayData={},unsubFn=null;
+let MEMBERS=[],activeMi=0,currentData={},unsubFn=null;
+let currentDate=new Date();
 
-function dateKey(d=new Date()){return `${d.getFullYear()}_${String(d.getMonth()+1).padStart(2,'0')}_${String(d.getDate()).padStart(2,'0')}`;}
-const TODAY=dateKey();
-document.getElementById('today-label').textContent=new Date().toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',weekday:'short'});
+function dateKey(d){
+  return `${d.getFullYear()}_${String(d.getMonth()+1).padStart(2,'0')}_${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function updateDateLabel(){
+  const d=currentDate;
+  const isToday=dateKey(d)===dateKey(new Date());
+  document.getElementById('date-label').textContent=
+    d.toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',weekday:'short'})+(isToday?' 今日':'');
+}
+
+function shiftDate(delta){
+  const d=new Date(currentDate);
+  d.setDate(d.getDate()+delta);
+  // Don't go into the future
+  if(d>new Date()) return;
+  currentDate=d;
+  updateDateLabel();
+  if(MEMBERS.length>0) switchMember(activeMi);
+}
+
+updateDateLabel();
 
 db.ref('/config/members').once('value',snap=>{
   const d=snap.val();
@@ -183,63 +212,65 @@ function renderTabs(){
 function switchMember(mi){
   activeMi=mi;
   const m=MEMBERS[mi];
-  // Update tabs
   document.querySelectorAll('.mtab').forEach((t,i)=>{
     t.classList.toggle('active',i===mi);
     t.style.borderBottomColor=i===mi?m.color:'transparent';
   });
-  // Update button color
-  document.getElementById('record-btn').style.background=m.color;
   document.getElementById('save-btn').style.background=m.color;
   document.getElementById('progress-fill').style.background=m.color;
-  // Listen
   if(unsubFn){unsubFn();unsubFn=null;}
-  const ref=db.ref(`/members/${m.name}/${TODAY}`);
-  ref.on('value',snap=>{todayData=snap.val()||{};updateStats(m);});
+  const key=dateKey(currentDate);
+  const ref=db.ref(`/members/${m.name}/${key}`);
+  ref.on('value',snap=>{currentData=snap.val()||{};updateStats(m);});
   unsubFn=()=>ref.off();
 }
 
 function updateStats(m){
   m=m||MEMBERS[activeMi];
-  document.getElementById('s-kakuden').textContent=todayData.kakuden||0;
-  document.getElementById('s-tsuden').textContent=todayData.tsuden||0;
-  document.getElementById('s-apo').textContent=todayData.apo||0;
-  const goal=parseInt(localStorage.getItem(`goal-${m.name}`)||'50');
-  const kak=todayData.kakuden||0;
+  document.getElementById('s-kakuden').textContent=currentData.kakuden||0;
+  document.getElementById('s-tsuden').textContent=currentData.tsuden||0;
+  document.getElementById('s-apo').textContent=currentData.apo||0;
+  const goal=50;
+  const kak=currentData.kakuden||0;
   const pct=Math.min(100,Math.round(kak/goal*100));
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-label').textContent=`目標 ${goal} 件 (${pct}%)`;
 }
 
-function quickAdd(type){
-  const m=MEMBERS[activeMi];
-  const base=db.ref(`/members/${m.name}/${TODAY}`);
-  if(type==='kakuden_only'){
-    base.child('kakuden').transaction(c=>(c||0)+1);
-    showToast('📞 架電のみ +1');
-  } else {
-    base.child('kakuden').transaction(c=>(c||0)+1);
-    base.child('tsuden').transaction(c=>(c||0)+1);
-    showToast('🗣️ 通電 +1');
-  }
-}
+let counts={},activeGenre='';
 
-let counts={};
-function openModal(){
+function openModal(genre){
+  activeGenre=genre;
   counts={kakuden_only:0,tsuden:0,apo_media:0,apo_jinzai:0};
-  ['kakuden_only','tsuden','apo_media','apo_jinzai'].forEach(t=>document.getElementById('cv-'+t).textContent='0');
+  ['kakuden_only','tsuden','apo_media','apo_jinzai'].forEach(t=>{
+    document.getElementById('cv-'+t).textContent='0';
+  });
+  document.getElementById('modal-genre-label').textContent=genre+' の結果を入力';
   document.getElementById('genre-modal').classList.add('open');
 }
-function closeModal(){document.getElementById('genre-modal').classList.remove('open');}
+
+function closeModal(){
+  document.getElementById('genre-modal').classList.remove('open');
+}
+
 function adj(type,delta){
   counts[type]=Math.max(0,(counts[type]||0)+delta);
   document.getElementById('cv-'+type).textContent=counts[type];
 }
+
 function saveModal(){
   const m=MEMBERS[activeMi];
-  const base=db.ref(`/members/${m.name}/${TODAY}`);
+  const key=dateKey(currentDate);
+  const base=db.ref(`/members/${m.name}/${key}`);
   const kk=counts.kakuden_only||0,ts=counts.tsuden||0,am=counts.apo_media||0,aj=counts.apo_jinzai||0;
   const totalKak=kk+ts+am+aj,totalTs=ts+am+aj,totalApo=am+aj;
+  if(totalKak===0){showToast('件数を入力してください');return;}
+  // Write genre breakdown (for main app's genre accordion)
+  const gBase=base.child('genre/'+activeGenre);
+  if(totalKak>0) gBase.child('kakuden').transaction(c=>(c||0)+totalKak);
+  if(totalTs>0) gBase.child('tsuden').transaction(c=>(c||0)+totalTs);
+  if(totalApo>0) gBase.child('apo').transaction(c=>(c||0)+totalApo);
+  // Write top-level totals (for stats display & main counters)
   if(totalKak>0) base.child('kakuden').transaction(c=>(c||0)+totalKak);
   if(totalTs>0) base.child('tsuden').transaction(c=>(c||0)+totalTs);
   if(totalApo>0){
@@ -248,11 +279,11 @@ function saveModal(){
     if(aj>0) base.child('apo_jinzai').transaction(c=>(c||0)+aj);
   }
   const parts=[];
-  if(kk>0) parts.push(`架電のみ×${kk}`);
+  if(kk>0) parts.push(`架電×${kk}`);
   if(ts>0) parts.push(`通電×${ts}`);
   if(am>0) parts.push(`アポ(媒体)×${am}`);
   if(aj>0) parts.push(`アポ(人材)×${aj}`);
-  if(parts.length>0) showToast(parts.join(' '));
+  showToast('['+activeGenre+'] '+parts.join(' '));
   closeModal();
 }
 
