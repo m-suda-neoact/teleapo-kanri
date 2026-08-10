@@ -233,6 +233,15 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .result-btn .r-text{display:flex;flex-direction:column}
 .result-btn .r-label{font-size:15px;font-weight:700}
 .result-btn .r-sub{font-size:11px;opacity:.8;font-weight:400;margin-top:2px}
+.result-row{padding:14px 18px;border-radius:14px;color:#fff;display:flex;align-items:center;gap:12px}
+.result-row .r-icon{font-size:22px}
+.result-row .r-text{display:flex;flex-direction:column;flex:1}
+.result-row .r-label{font-size:15px;font-weight:700}
+.result-row .r-sub{font-size:11px;opacity:.8;font-weight:400;margin-top:2px}
+.cnt-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.cnt-btn{width:34px;height:34px;border:none;border-radius:50%;background:rgba(255,255,255,.3);color:#fff;font-size:22px;font-weight:700;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+.cnt-btn:active{background:rgba(255,255,255,.5)}
+.cnt-val{min-width:30px;text-align:center;font-size:20px;font-weight:700}
 .selected-genre-badge{display:inline-block;background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;color:#424242;margin-bottom:16px}
 
 /* Celebration overlay */
@@ -383,34 +392,26 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 </div>
 
 <!-- 結果選択モーダル（職種選択後） -->
-<div class="modal-overlay hidden" id="modal-genre" onclick="if(event.target===this)closeGenreModal()">
+<div class="modal-overlay hidden" id="modal-genre">
   <div class="modal-sheet">
     <div class="modal-title">
       <span>結果を選択</span>
-      <button class="modal-close" onclick="closeGenreModal()">×</button>
+      <button class="modal-close" onclick="saveAndCloseGenreModal()">×</button>
     </div>
     <div id="selected-genre-disp" class="selected-genre-badge"></div>
     <div class="result-grid">
-      <button class="result-btn" style="background:#78909C" onclick="recordCall('kakuden_only')">
+      <div class="result-row" style="background:#78909C">
         <span class="r-icon">📞</span>
         <span class="r-text"><span class="r-label">架電のみ</span><span class="r-sub">繋がらなかった / 自動応答・不在</span></span>
-      </button>
-      <button class="result-btn" style="background:#42A5F5" onclick="recordCall('tsuden')">
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adjGenre('kakuden_only',-1)">－</button>
+          <span class="cnt-val" id="gv-kakuden_only">0</span>
+          <button class="cnt-btn" onclick="adjGenre('kakuden_only',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#42A5F5">
         <span class="r-icon">🗣️</span>
-        <span class="r-text"><span class="r-label">通電した</span><span class="r-sub">担当者・決裁者が実際に出た</span></span>
-      </button>
-      <button class="result-btn" style="background:#66BB6A" onclick="recordCall('apo','media')">
-        <span class="r-icon">🎉</span>
-        <span class="r-text"><span class="r-label">アポ（媒体運用）</span><span class="r-sub">商談確定・媒体提案</span></span>
-      </button>
-      <button class="result-btn" style="background:#26A69A" onclick="recordCall('apo','jinzai')">
-        <span class="r-icon">🎊</span>
-        <span class="r-text"><span class="r-label">アポ（人材紹介）</span><span class="r-sub">商談確定・人材提案</span></span>
-      </button>
-    </div>
-  </div>
-</div>
-
+        <span class="�ȵѕ�Ј�������������w"��&V�#�	����8~8���7���7�6�73�'"�7V"#�h�^[�>�^8;�k��8�^8�Z�����8�X{�8���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�wG7VFV�r���#������'WGF����7�6�73�&6�B�f�"�C�&wb�G7VFV�#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�wG7VFV�r��#��ȳ��'WGF�����F�c���F�c��F�b6�73�'&W7V�B�&�r"7G��S�&&6�w&�V�C�3cd$#d#��7�6�73�'"֖6��#�	����7���7�6�73�'"�FW�B#��7�6�73�'"��&V�#�8*.89��ȎZ�.K�>��yJ��ȓ��7���7�6�73�'"�7V"#�YXn��~z+�Z�8;�Z�.K�>h�j���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v���VF�r���#������'WGF����7�6�73�&6�B�f�"�C�&wb����VF�#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v���VF�r��#��ȳ��'WGF�����F�c���F�c��F�b6�73�'&W7V�B�&�r"7G��S�&&6�w&�V�C�3#dc�#��7�6�73�'"֖6��#�	����7���7�6�73�'"�FW�B#��7�6�73�'"��&V�#�8*.89��ȎK��i�{K�K���ȓ��7���7�6�73�'"�7V"#�YXn��~z+�Z�8;�K��i�h�j���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v������r���#������'WGF����7�6�73�&6�B�f�"�C�&wb�������#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v������r��#��ȳ��'WGF�����F�c���F�c���F�c���F�c���F�c�
 <!-- 成約モーダル -->
 <div class="modal-overlay hidden" id="modal-seiyaku" onclick="if(event.target===this)closeSeiyakuModal()">
   <div class="modal-sheet">
@@ -870,48 +871,58 @@ function updateGoalBar(mi){
 }
 
 // ── 職種モーダル ─────────────────────────────────────────────
+let _genreCounts={};
 function openGenreModal(mi,genre){
   _genreMi=mi;_selectedGenre=genre;
+  _genreCounts={kakuden_only:0,tsuden:0,apo_media:0,apo_jinzai:0};
+  ['kakuden_only','tsuden','apo_media','apo_jinzai'].forEach(t=>{
+    const el=document.getElementById('gv-'+t);if(el) el.textContent='0';
+  });
   document.getElementById('selected-genre-disp').textContent=genre;
   document.getElementById('modal-genre').classList.remove('hidden');
 }
+function adjGenre(type,delta){
+  _genreCounts[type]=Math.max(0,(_genreCounts[type]||0)+delta);
+  const el=document.getElementById('gv-'+type);
+  if(el) el.textContent=_genreCounts[type];
+}
 function closeGenreModal(){
   document.getElementById('modal-genre').classList.add('hidden');
-  _genreMi=null;_selectedGenre=null;
+  _genreMi=null;_selectedGenre=null;_genreCounts={};
 }
-function recordCall(result,bunnya){
-  if(_genreMi===null||!_selectedGenre||!db) return;
+function saveAndCloseGenreModal(){
+  if(_genreMi===null||!_selectedGenre||!db){closeGenreModal();return;}
   const mi=_genreMi;const genre=_selectedGenre;
   const m=MEMBERS[mi];const dk=dateKey(activeDates[mi]);
   const base=db.ref(`/members/${m.name}/${dk}`);
-  base.child('kakuden').transaction(c=>Math.max(0,(c||0)+1));
-  base.child(`genre/${genre}/kakuden`).transaction(c=>Math.max(0,(c||0)+1));
-  if(result==='tsuden'||result==='apo'){
-    base.child('tsuden').transaction(c=>Math.max(0,(c||0)+1));
-    base.child(`genre/${genre}/tsuden`).transaction(c=>Math.max(0,(c||0)+1));
+  const kk=_genreCounts.kakuden_only||0;
+  const ts=_genreCounts.tsuden||0;
+  const am=_genreCounts.apo_media||0;
+  const aj=_genreCounts.apo_jinzai||0;
+  const totalKak=kk+ts+am+aj;
+  const totalTs=ts+am+aj;
+  const totalApo=am+aj;
+  if(totalKak>0){
+    base.child('kakuden').transaction(c=>(c||0)+totalKak);
+    base.child(`genre/${genre}/kakuden`).transaction(c=>(c||0)+totalKak);
   }
-  if(result==='apo'){
-    base.child('apo').transaction(c=>Math.max(0,(c||0)+1));
-    base.child(`genre/${genre}/apo`).transaction(c=>Math.max(0,(c||0)+1));
-    if(bunnya) base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)+1));
+  if(totalTs>0){
+    base.child('tsuden').transaction(c=>(c||0)+totalTs);
+    base.child(`genre/${genre}/tsuden`).transaction(c=>(c||0)+totalTs);
+  }
+  if(totalApo>0){
+    base.child('apo').transaction(c=>(c||0)+totalApo);
+    base.child(`genre/${genre}/apo`).transaction(c=>(c||0)+totalApo);
+    if(am>0) base.child('apo_media').transaction(c=>(c||0)+am);
+    if(aj>0) base.child('apo_jinzai').transaction(c=>(c||0)+aj);
     launchConfetti(false);
   }
-  const bunnyaLabel=bunnya==='media'?'（媒体）':bunnya==='jinzai'?'（人材）':'';
-  const label=result==='apo'?`🎉 アポ！${bunnyaLabel}`:result==='tsuden'?'🗣️ 通電 +1':'📞 架電 +1';
-  const undoCb=()=>{
-    base.child('kakuden').transaction(c=>Math.max(0,(c||0)-1));
-    base.child(`genre/${genre}/kakuden`).transaction(c=>Math.max(0,(c||0)-1));
-    if(result==='tsuden'||result==='apo'){
-      base.child('tsuden').transaction(c=>Math.max(0,(c||0)-1));
-      base.child(`genre/${genre}/tsuden`).transaction(c=>Math.max(0,(c||0)-1));
-    }
-    if(result==='apo'){
-      base.child('apo').transaction(c=>Math.max(0,(c||0)-1));
-      base.child(`genre/${genre}/apo`).transaction(c=>Math.max(0,(c||0)-1));
-      if(bunnya) base.child(`apo_${bunnya}`).transaction(c=>Math.max(0,(c||0)-1));
-    }
-  };
-  toastWithUndo(`[${genre}] ${label}`,undoCb);
+  const parts=[];
+  if(kk>0) parts.push(`架電のみ×${kk}`);
+  if(ts>0) parts.push(`通電×${ts}`);
+  if(am>0) parts.push(`アポ(媒体)×${am}`);
+  if(aj>0) parts.push(`アポ(人材)×${aj}`);
+  if(parts.length>0) toast(`[${genre}] ${parts.join(' ')}`);
   closeGenreModal();
 }
 
