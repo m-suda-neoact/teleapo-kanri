@@ -411,7 +411,35 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
       </div>
       <div class="result-row" style="background:#42A5F5">
         <span class="r-icon">🗣️</span>
-        <span class="�ȵѕ�Ј�������������w"��&V�#�	����8~8���7���7�6�73�'"�7V"#�h�^[�>�^8;�k��8�^8�Z�����8�X{�8���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�wG7VFV�r���#������'WGF����7�6�73�&6�B�f�"�C�&wb�G7VFV�#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�wG7VFV�r��#��ȳ��'WGF�����F�c���F�c��F�b6�73�'&W7V�B�&�r"7G��S�&&6�w&�V�C�3cd$#d#��7�6�73�'"֖6��#�	����7���7�6�73�'"�FW�B#��7�6�73�'"��&V�#�8*.89��ȎZ�.K�>��yJ��ȓ��7���7�6�73�'"�7V"#�YXn��~z+�Z�8;�Z�.K�>h�j���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v���VF�r���#������'WGF����7�6�73�&6�B�f�"�C�&wb����VF�#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v���VF�r��#��ȳ��'WGF�����F�c���F�c��F�b6�73�'&W7V�B�&�r"7G��S�&&6�w&�V�C�3#dc�#��7�6�73�'"֖6��#�	����7���7�6�73�'"�FW�B#��7�6�73�'"��&V�#�8*.89��ȎK��i�{K�K���ȓ��7���7�6�73�'"�7V"#�YXn��~z+�Z�8;�K��i�h�j���7����7���F�b6�73�&6�B�7G&�#��'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v������r���#������'WGF����7�6�73�&6�B�f�"�C�&wb�������#���7���'WGF��6�73�&6�B�'F�"��6Ɩ6��&F�vV�&R�v������r��#��ȳ��'WGF�����F�c���F�c���F�c���F�c���F�c�
+        <span class="r-text"><span class="r-label">通電した</span><span class="r-sub">担当者・決裁者が実際に出た</span></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adjGenre('tsuden',-1)">－</button>
+          <span class="cnt-val" id="gv-tsuden">0</span>
+          <button class="cnt-btn" onclick="adjGenre('tsuden',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#66BB6A">
+        <span class="r-icon">🎉</span>
+        <span class="r-text"><span class="r-label">アポ（媒体運用）</span><span class="r-sub">商談確定・媒体提案</span></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adjGenre('apo_media',-1)">－</button>
+          <span class="cnt-val" id="gv-apo_media">0</span>
+          <button class="cnt-btn" onclick="adjGenre('apo_media',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#26A69A">
+        <span class="r-icon">🎊</span>
+        <span class="r-text"><span class="r-label">アポ（人材紹介）</span><span class="r-sub">商談確定・人材提案</span></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adjGenre('apo_jinzai',-1)">－</button>
+          <span class="cnt-val" id="gv-apo_jinzai">0</span>
+          <button class="cnt-btn" onclick="adjGenre('apo_jinzai',1)">＋</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- 成約モーダル -->
 <div class="modal-overlay hidden" id="modal-seiyaku" onclick="if(event.target===this)closeSeiyakuModal()">
   <div class="modal-sheet">
