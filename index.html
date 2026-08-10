@@ -11,6 +11,8 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 .tab-bar{display:flex;background:#fff;border-bottom:1px solid #E0E0E0;position:sticky;top:0;z-index:10;overflow-x:auto}
 .tab{flex:0 0 auto;padding:13px 16px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#9E9E9E;border-bottom:3px solid transparent;transition:all .15s;white-space:nowrap}
 .tab.active{color:#212121;border-bottom-color:#212121}
+.mini-float-btn{margin-left:auto;flex-shrink:0;padding:6px 10px;background:none;border:none;cursor:pointer;font-size:16px;color:#9E9E9E;display:flex;align-items:center;line-height:1;border-radius:4px}
+.mini-float-btn:hover{background:#f5f5f5;color:#333}
 .page{display:none;padding:16px;max-width:520px;margin:0 auto}
 .page.active{display:block}
 
@@ -731,6 +733,12 @@ function buildTabs(){
     t.onclick=()=>showTab(id);
     bar.appendChild(t);
   });
+  const miniBtn=document.createElement('button');
+  miniBtn.className='mini-float-btn';
+  miniBtn.textContent='⊡';
+  miniBtn.title='ミニウィンドウで開く';
+  miniBtn.onclick=()=>window.open('https://sweet-cat-539d37.netlify.app/mini.html','teleapo-mini','width=290,height=470,left='+(screen.availWidth-300)+',top='+(screen.availHeight-480));
+  bar.appendChild(miniBtn);
 }
 
 // ── Firebaseメンバー監視 ─────────────────────────────────────
