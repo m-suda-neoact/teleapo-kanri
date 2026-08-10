@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>テレアポ mini</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#1a1a2e;color:#fff;width:290px;min-height:460px;overflow-x:hidden;user-select:none}
+.hdr{background:#16213e;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
+.hdr-title{font-size:14px;font-weight:700}
+.hdr-date{font-size:11px;opacity:.6}
+.member-tabs{display:flex;background:#0f3460;overflow-x:auto;scrollbar-width:none}
+.member-tabs::-webkit-scrollbar{display:none}
+.mtab{flex:1;padding:8px 4px;text-align:center;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;opacity:.55;transition:all .15s}
+.mtab.active{opacity:1;font-weight:700}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 10px 8px}
+.stat-card{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 6px;text-align:center;border:1px solid rgba(255,255,255,.08)}
+.stat-num{font-size:26px;font-weight:700;line-height:1.1}
+.stat-sub{font-size:10px;opacity:.6;margin-top:2px}
+.progress-wrap{padding:0 10px 10px}
+.progress-bar-bg{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:2px;transition:width .3s ease}
+.progress-label{font-size:10px;opacity:.5;margin-top:4px;text-align:right}
+.action-area{padding:0 10px 8px}
+.record-btn{width:100%;padding:12px;border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.3px}
+.record-btn:active{opacity:.8}
+.quick-area{padding:0 10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.quick-btn{padding:8px 4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:rgba(255,255,255,.8);font-size:11px;cursor:pointer;text-align:center;transition:background .15s}
+.quick-btn:active{background:rgba(255,255,255,.2)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:flex-end}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:#1e2a4a;width:100%;border-radius:16px 16px 0 0;padding:16px 12px 20px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.modal-head-title{font-size:15px;font-weight:700}
+.modal-close-btn{width:28px;height:28px;background:rgba(255,255,255,.1);border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.result-rows{display:flex;flex-direction:column;gap:7px}
+.result-row{display:flex;align-items:center;gap:10px;border-radius:10px;padding:9px 12px}
+.r-icon{font-size:18px;flex-shrink:0}
+.r-text{flex:1}
+.r-label{font-size:12px;font-weight:600}
+.r-sub{font-size:10px;opacity:.55;margin-top:1px}
+.cnt-ctrl{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.cnt-btn{width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.cnt-btn:active{background:rgba(255,255,255,.45)}
+.cnt-val{min-width:22px;text-align:center;font-size:17px;font-weight:700}
+.save-btn{margin-top:12px;width:100%;padding:12px;border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.save-btn:active{opacity:.8}
+.toast{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);color:#1a1a2e;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:200}
+.toast.show{opacity:1}
+.loading{text-align:center;padding:30px 20px;opacity:.5;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-title">📞 テレアポ実績</div>
+  <div class="hdr-date" id="today-label">--</div>
+</div>
+
+<div class="member-tabs" id="member-tabs">
+  <div class="loading">接続中...</div>
+</div>
+
+<div id="main-content" style="display:none">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num" id="s-kakuden">-</div>
+      <div class="stat-sub">架電</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="s-tsuden">-</div>
+      <div class="stat-sub">通電</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="s-apo" style="color:#66BB6A">-</div>
+      <div class="stat-sub">アポ</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="progress-label"></div>
+  </div>
+
+  <div class="action-area">
+    <button class="record-btn" id="record-btn" onclick="openModal()">＋ 結果を選択</button>
+  </div>
+
+  <div class="quick-area">
+    <button class="quick-btn" onclick="quickAdd('kakuden_only')">📞 架電のみ ＋1</button>
+    <button class="quick-btn" onclick="quickAdd('tsuden')">🗣️ 通電 ＋1</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="genre-modal">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <span class="modal-head-title">結果を選択</span>
+      <button class="modal-close-btn" onclick="closeModal()">×</button>
+    </div>
+    <div class="result-rows">
+      <div class="result-row" style="background:#546E7A">
+        <span class="r-icon">📞</span>
+        <span class="r-text"><div class="r-label">架電のみ</div><div class="r-sub">繋がらなかった / 不在</div></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adj('kakuden_only',-1)">－</button>
+          <span class="cnt-val" id="cv-kakuden_only">0</span>
+          <button class="cnt-btn" onclick="adj('kakuden_only',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#1976D2">
+        <span class="r-icon">🗣️</span>
+        <span class="r-text"><div class="r-label">通電した</div><div class="r-sub">担当者が実際に出た</div></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adj('tsuden',-1)">－</button>
+          <span class="cnt-val" id="cv-tsuden">0</span>
+          <button class="cnt-btn" onclick="adj('tsuden',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#388E3C">
+        <span class="r-icon">🎉</span>
+        <span class="r-text"><div class="r-label">アポ（媒体運用）</div><div class="r-sub">商談確定・媒体提案</div></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adj('apo_media',-1)">－</button>
+          <span class="cnt-val" id="cv-apo_media">0</span>
+          <button class="cnt-btn" onclick="adj('apo_media',1)">＋</button>
+        </div>
+      </div>
+      <div class="result-row" style="background:#00796B">
+        <span class="r-icon">🎊</span>
+        <span class="r-text"><div class="r-label">アポ（人材紹介）</div><div class="r-sub">商談確定・人材提案</div></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adj('apo_jinzai',-1)">－</button>
+          <span class="cnt-val" id="cv-apo_jinzai">0</span>
+          <button class="cnt-btn" onclick="adj('apo_jinzai',1)">＋</button>
+        </div>
+      </div>
+    </div>
+    <button class="save-btn" id="save-btn" onclick="saveModal()">保存して閉じる</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyCUspepcbxsyJ6JdRx6K0iT8XGXlB6ZKEo",
+  authDomain:"teleapo-tracker.firebaseapp.com",
+  databaseURL:"https://teleapo-tracker-default-rtdb.firebaseio.com",
+  projectId:"teleapo-tracker",
+  storageBucket:"teleapo-tracker.firebasestorage.app",
+  messagingSenderId:"385687074224",
+  appId:"1:385687074224:web:145a788b51328f31eb5275"
+});
+const db=firebase.database();
+const DEFAULT_MEMBERS=[{name:'三五',color:'#8BC34A'},{name:'中山',color:'#29B6F6'},{name:'藤田',color:'#F4511E'}];
+let MEMBERS=[],activeMi=0,todayData={},unsubFn=null;
+
+function dateKey(d=new Date()){return `${d.getFullYear()}_${String(d.getMonth()+1).padStart(2,'0')}_${String(d.getDate()).padStart(2,'0')}`;}
+const TODAY=dateKey();
+document.getElementById('today-label').textContent=new Date().toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',weekday:'short'});
+
+db.ref('/config/members').once('value',snap=>{
+  const d=snap.val();
+  MEMBERS=d?Object.values(d).sort((a,b)=>(a.order||0)-(b.order||0)):DEFAULT_MEMBERS;
+  renderTabs();
+  switchMember(0);
+});
+
+function renderTabs(){
+  document.getElementById('member-tabs').innerHTML=MEMBERS.map((m,i)=>
+    `<div class="mtab${i===0?' active':''}" style="border-bottom-color:${i===0?m.color:'transparent'}" onclick="switchMember(${i})">${m.name}</div>`
+  ).join('');
+  document.getElementById('main-content').style.display='block';
+}
+
+function switchMember(mi){
+  activeMi=mi;
+  const m=MEMBERS[mi];
+  // Update tabs
+  document.querySelectorAll('.mtab').forEach((t,i)=>{
+    t.classList.toggle('active',i===mi);
+    t.style.borderBottomColor=i===mi?m.color:'transparent';
+  });
+  // Update button color
+  document.getElementById('record-btn').style.background=m.color;
+  document.getElementById('save-btn').style.background=m.color;
+  document.getElementById('progress-fill').style.background=m.color;
+  // Listen
+  if(unsubFn){unsubFn();unsubFn=null;}
+  const ref=db.ref(`/members/${m.name}/${TODAY}`);
+  ref.on('value',snap=>{todayData=snap.val()||{};updateStats(m);});
+  unsubFn=()=>ref.off();
+}
+
+function updateStats(m){
+  m=m||MEMBERS[activeMi];
+  document.getElementById('s-kakuden').textContent=todayData.kakuden||0;
+  document.getElementById('s-tsuden').textContent=todayData.tsuden||0;
+  document.getElementById('s-apo').textContent=todayData.apo||0;
+  const goal=parseInt(localStorage.getItem(`goal-${m.name}`)||'50');
+  const kak=todayData.kakuden||0;
+  const pct=Math.min(100,Math.round(kak/goal*100));
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-label').textContent=`目標 ${goal} 件 (${pct}%)`;
+}
+
+function quickAdd(type){
+  const m=MEMBERS[activeMi];
+  const base=db.ref(`/members/${m.name}/${TODAY}`);
+  if(type==='kakuden_only'){
+    base.child('kakuden').transaction(c=>(c||0)+1);
+    showToast('📞 架電のみ +1');
+  } else {
+    base.child('kakuden').transaction(c=>(c||0)+1);
+    base.child('tsuden').transaction(c=>(c||0)+1);
+    showToast('🗣️ 通電 +1');
+  }
+}
+
+let counts={};
+function openModal(){
+  counts={kakuden_only:0,tsuden:0,apo_media:0,apo_jinzai:0};
+  ['kakuden_only','tsuden','apo_media','apo_jinzai'].forEach(t=>document.getElementById('cv-'+t).textContent='0');
+  document.getElementById('genre-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('genre-modal').classList.remove('open');}
+function adj(type,delta){
+  counts[type]=Math.max(0,(counts[type]||0)+delta);
+  document.getElementById('cv-'+type).textContent=counts[type];
+}
+function saveModal(){
+  const m=MEMBERS[activeMi];
+  const base=db.ref(`/members/${m.name}/${TODAY}`);
+  const kk=counts.kakuden_only||0,ts=counts.tsuden||0,am=counts.apo_media||0,aj=counts.apo_jinzai||0;
+  const totalKak=kk+ts+am+aj,totalTs=ts+am+aj,totalApo=am+aj;
+  if(totalKak>0) base.child('kakuden').transaction(c=>(c||0)+totalKak);
+  if(totalTs>0) base.child('tsuden').transaction(c=>(c||0)+totalTs);
+  if(totalApo>0){
+    base.child('apo').transaction(c=>(c||0)+totalApo);
+    if(am>0) base.child('apo_media').transaction(c=>(c||0)+am);
+    if(aj>0) base.child('apo_jinzai').transaction(c=>(c||0)+aj);
+  }
+  const parts=[];
+  if(kk>0) parts.push(`架電のみ×${kk}`);
+  if(ts>0) parts.push(`通電×${ts}`);
+  if(am>0) parts.push(`アポ(媒体)×${am}`);
+  if(aj>0) parts.push(`アポ(人材)×${aj}`);
+  if(parts.length>0) showToast(parts.join(' '));
+  closeModal();
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+</script>
+</body>
+</html>
