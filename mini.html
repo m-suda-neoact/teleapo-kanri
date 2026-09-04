@@ -173,7 +173,8 @@ let MEMBERS=[],activeMi=0,currentData={},unsubFn=null;
 let currentDate=new Date();
 
 function dateKey(d){
-  return `${d.getFullYear()}_${String(d.getMonth()+1).padStart(2,'0')}_${String(d.getDate()).padStart(2,'0')}`;
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
 }
 
 function updateDateLabel(){
@@ -186,7 +187,6 @@ function updateDateLabel(){
 function shiftDate(delta){
   const d=new Date(currentDate);
   d.setDate(d.getDate()+delta);
-  // Don't go into the future
   if(d>new Date()) return;
   currentDate=d;
   updateDateLabel();
@@ -265,12 +265,10 @@ function saveModal(){
   const kk=counts.kakuden_only||0,ts=counts.tsuden||0,am=counts.apo_media||0,aj=counts.apo_jinzai||0;
   const totalKak=kk+ts+am+aj,totalTs=ts+am+aj,totalApo=am+aj;
   if(totalKak===0){showToast('件数を入力してください');return;}
-  // Write genre breakdown (for main app's genre accordion)
   const gBase=base.child('genre/'+activeGenre);
   if(totalKak>0) gBase.child('kakuden').transaction(c=>(c||0)+totalKak);
   if(totalTs>0) gBase.child('tsuden').transaction(c=>(c||0)+totalTs);
   if(totalApo>0) gBase.child('apo').transaction(c=>(c||0)+totalApo);
-  // Write top-level totals (for stats display & main counters)
   if(totalKak>0) base.child('kakuden').transaction(c=>(c||0)+totalKak);
   if(totalTs>0) base.child('tsuden').transaction(c=>(c||0)+totalTs);
   if(totalApo>0){
