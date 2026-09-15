@@ -1406,7 +1406,7 @@ function openManager(){
   if(list){
     list.innerHTML=MEMBERS.map((m,i)=>`
       <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F5F5F5">
-        <div style="width:14px;height:14px;border-radius:50%;background:${m.color};flex-shrink:0"></div>
+        <input type="color" value="${m.color}" oninput="updateMemberColor('${m.name}',this.value)" style="width:28px;height:28px;border-radius:50%;border:none;padding:2px;cursor:pointer;flex-shrink:0;background:none">
         <span style="flex:1;font-weight:700">${m.name}</span>
         <button onclick="deleteMember('${m.name}')" style="background:#F44336;color:#fff;border:none;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer">削除</button>
       </div>`).join('');
@@ -1419,6 +1419,10 @@ function deleteMember(name){
     db.ref(`/config/members/${name}`).remove();
     toast(`${name}を削除しました`);
   });
+}
+function updateMemberColor(name,color){
+  if(!db) return;
+  db.ref(`/config/members/${name}/color`).set(color);
 }
 function onPickerChange(v){
   selColor=v;
