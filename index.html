@@ -479,6 +479,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
         <div class="color-preview" id="color-preview" style="background:#8BC34A"></div>
         <input type="text" class="color-code-input" id="color-code" value="#8BC34A" placeholder="#000000" maxlength="7" oninput="onCodeChange(this.value)">
       </div>
+      <div id="add-color-swatches" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div>
       <button class="add-btn" onclick="addMember()">追加する</button>
     </div>
   </div>
@@ -516,6 +517,7 @@ body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;b
 // ── 定数 ─────────────────────────────────────────────────────
 const GENRES = ['IT','営業','建築','接客','その他'];
 const DEFAULT_MEMBERS=[{name:'三五',color:'#8BC34A'},{name:'中山',color:'#29B6F6'},{name:'藤田',color:'#F4511E'}];
+const COLOR_PRESETS=['#8BC34A','#29B6F6','#F4511E','#9C27B0','#FF9800','#E91E63','#00BCD4','#607D8B','#FFEB3B','#795548'];
 const FB={
   apiKey:"AIzaSyCUspepcbxsyJ6JdRx6K0iT8XGXlB6ZKEo",
   authDomain:"teleapo-tracker.firebaseapp.com",
@@ -1405,12 +1407,19 @@ function openManager(){
   const list=document.getElementById('member-list');
   if(list){
     list.innerHTML=MEMBERS.map((m,i)=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F5F5F5">
-        <input type="color" value="${m.color}" oninput="updateMemberColor('${m.name}',this.value)" style="width:28px;height:28px;border-radius:50%;border:none;padding:2px;cursor:pointer;flex-shrink:0;background:none">
-        <span style="flex:1;font-weight:700">${m.name}</span>
-        <button onclick="deleteMember('${m.name}')" style="background:#F44336;color:#fff;border:none;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer">削除</button>
+      <div style="padding:10px 0;border-bottom:1px solid #F5F5F5">
+        <div style="display:flex;align-items:center;gap:10px">
+          <input type="color" id="cp-${m.name}" value="${m.color}" onchange="pickMemberColor('${m.name}',this.value)" style="width:28px;height:28px;border-radius:50%;border:none;padding:2px;cursor:pointer;flex-shrink:0;background:none">
+          <span style="flex:1;font-weight:700">${m.name}</span>
+          <button onclick="deleteMember('${m.name}')" style="background:#F44336;color:#fff;border:none;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer">削除</button>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+          ${COLOR_PRESETS.map(c=>`<div onclick="pickMemberColor('${m.name}','${c}')" title="${c}" style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;box-sizing:border-box;border:3px solid ${c.toLowerCase()===m.color.toLowerCase()?'#555':'transparent'}"></div>`).join('')}
+        </div>
       </div>`).join('');
   }
+  const addSw=document.getElementById('add-color-swatches');
+  if(addSw) addSw.innerHTML=COLOR_PRESETS.map(c=>`<div onclick="onPickerChange('${c}')" title="${c}" style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;box-sizing:border-box;border:3px solid transparent"></div>`).join('');
   document.getElementById('modal-mgr').classList.remove('hidden');
 }
 function deleteMember(name){
@@ -1423,6 +1432,12 @@ function deleteMember(name){
 function updateMemberColor(name,color){
   if(!db) return;
   db.ref(`/config/members/${name}/color`).set(color);
+}
+function pickMemberColor(name,color){
+  if(!db) return;
+  db.ref(`/config/members/${name}/color`).set(color);
+  const cp=document.getElementById('cp-'+name);
+  if(cp) cp.value=color;
 }
 function onPickerChange(v){
   selColor=v;
